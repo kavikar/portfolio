@@ -3,10 +3,10 @@ import { experiences, skillCategories, certifications, projects } from './data.j
 
 // ===== Typed text animation =====
 const typedPhrases = [
-  'QA & Automation Engineer',
-  'Test Architect',
+  'Software Quality Engineer',
+  'SDET',
+  'Test Infrastructure Builder',
   'AWS Cloud Practitioner',
-  'CI/CD Advocate',
 ];
 
 function initTyped(): void {
@@ -102,7 +102,7 @@ function initCounters(): void {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement;
           const target = parseInt(el.dataset['target'] ?? '0', 10);
-          const suffix = target >= 500 ? '+' : target >= 5 ? '+' : '';
+          const suffix = target >= 2 ? '+' : '';
           animateCounter(el, target, suffix);
           observer.unobserve(el);
         }
@@ -165,7 +165,6 @@ function renderCertifications(): void {
       <div>
         <div class="cert-name">${cert.name}</div>
         <div class="cert-issuer">${cert.issuer}</div>
-        <div class="cert-date">${cert.date}</div>
       </div>
     </div>
   `).join('');

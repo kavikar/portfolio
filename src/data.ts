@@ -16,7 +16,6 @@ export interface Certification {
   icon: string;
   name: string;
   issuer: string;
-  date: string;
 }
 
 export interface Project {
@@ -29,28 +28,36 @@ export interface Project {
 
 export const experiences: Experience[] = [
   {
-    role: "QA & Automation Lead",
-    company: "Capgemini — Atlanta, Georgia, USA",
-    period: "2019 – Present",
+    role: "QA Automation Engineer",
+    company: "Inspire Brands (via Capgemini) — Atlanta, GA",
+    period: "May 2023 – Present",
     description:
-      "Leading automation and quality assurance initiatives across web, mobile, and API platforms. Designing and implementing end-to-end test frameworks, driving CI/CD pipeline integration, and championing a quality-first engineering culture across cross-functional teams.",
-    tags: ["Selenium", "Appium", "REST Assured", "Jenkins", "AWS", "Agile", "qTest"],
+      "Independently architected PLATE, a test infrastructure platform integrating CI/CD pipeline orchestration, BrowserStack mobile execution, and automated Jira/Xray workflow sync — applied across multiple brand projects. Built the Maestro E2E framework for Sonic with smoke suites, shared flows, and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently contributing to Dunkin' loyalty resiliency and Fiserv payment error mapping.",
+    tags: ["Java", "Maestro", "BrowserStack", "GitLab CI/CD", "Jira/Xray", "Rest Assured", "SQL", "MongoDB"],
   },
   {
-    role: "QA Engineer",
-    company: "Capgemini — Bengaluru, Karnataka, India",
-    period: "2019",
+    role: "QA Automation Engineer — BWW Choice",
+    company: "Inspire Brands (via Capgemini) — Bengaluru, India",
+    period: "May 2022 – Apr 2023",
     description:
-      "Delivered automated testing solutions for enterprise clients, focusing on functional, regression, and API testing. Collaborated with development teams to integrate quality checks early in the delivery pipeline.",
-    tags: ["Tricentis Tosca", "Selenium", "API Testing", "Agile"],
+      "Led automation efforts for Buffalo Wild Wings Choice, a new in-store restaurant experience initiative. Automated web and mobile features using Java, Selenium, Appium, and Cucumber BDD. Implemented API automation with Rest Assured and database validations with SQL. Coordinated task assignments across the team.",
+    tags: ["Java", "Selenium", "Appium", "Cucumber BDD", "Rest Assured", "SQL"],
   },
   {
-    role: "Intern — QA Automation",
-    company: "Pune, Maharashtra, India",
-    period: "2018 – 2019",
+    role: "QA Automation Engineer — Arby's & Buffalo Wild Wings",
+    company: "Inspire Brands (via Capgemini) — Bengaluru, India",
+    period: "Jul 2020 – Apr 2022",
     description:
-      "Developed hands-on experience in test automation scripting and exploratory testing, contributing to live client projects during academic internship.",
-    tags: ["Selenium", "Java", "TestNG"],
+      "Joined a multi-platform automation framework at early-stage build-out and grew it to 2,000+ tests across web, mobile, and API layers using Java, Selenium, Appium, Rest Assured, and Cucumber BDD. Assumed lead responsibilities as the team scaled down, integrating test suites into GitLab CI/CD for nightly regression runs.",
+    tags: ["Java", "Selenium", "Appium", "Rest Assured", "Cucumber BDD", "GitLab CI/CD", "TestNG"],
+  },
+  {
+    role: "QA Automation Engineer — Retail & Care",
+    company: "T-Mobile — Bengaluru, India",
+    period: "Jan 2020 – Jun 2020",
+    description:
+      "Tested desktop, web, mobile, and API applications for retail and care operations using Tosca and Appium (Java). Validated APIs with Postman and tracked defects in Jira in close collaboration with development teams.",
+    tags: ["Tosca", "Appium", "Java", "Postman", "Jira"],
   },
 ];
 
@@ -58,32 +65,32 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: "🧪",
     name: "Test Automation",
-    skills: ["Selenium WebDriver", "Appium", "REST Assured", "Tricentis Tosca", "TestNG", "JUnit"],
+    skills: ["Selenium WebDriver", "Appium", "Rest Assured", "Maestro", "TestNG", "Cucumber BDD", "Tosca"],
   },
   {
-    icon: "☁️",
-    name: "Cloud & DevOps",
-    skills: ["AWS", "Jenkins", "CI/CD Pipelines", "Docker", "Git", "GitHub Actions"],
+    icon: "🏗️",
+    name: "Infrastructure & CI/CD",
+    skills: ["GitLab CI/CD", "BrowserStack", "Gradle", "Git", "PLATE Platform"],
   },
   {
     icon: "📋",
     name: "Test Management",
-    skills: ["qTest", "JIRA", "Test Planning", "Defect Management", "Agile/Scrum"],
+    skills: ["Jira", "Xray", "Test Planning", "Defect Tracking", "Agile/Scrum"],
   },
   {
     icon: "💻",
     name: "Languages",
-    skills: ["Java", "Python", "JavaScript", "TypeScript", "SQL", "Bash"],
+    skills: ["Java", "Python", "SQL", "Bash"],
   },
   {
-    icon: "📱",
-    name: "Mobile & API",
-    skills: ["Mobile Testing", "REST API", "Postman", "API Automation", "BDD"],
+    icon: "🗄️",
+    name: "Data & APIs",
+    skills: ["REST APIs", "Postman", "SQL", "MongoDB", "API Automation"],
   },
   {
-    icon: "🤖",
-    name: "Emerging Tech",
-    skills: ["Generative AI", "Machine Learning basics", "RPA (Tricentis)", "SVM"],
+    icon: "☁️",
+    name: "Cloud & Tools",
+    skills: ["AWS", "BrowserStack", "MongoDB", "Git", "Postman"],
   },
 ];
 
@@ -92,55 +99,37 @@ export const certifications: Certification[] = [
     icon: "☁️",
     name: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
-    date: "Mar 2023",
   },
   {
     icon: "🤖",
-    name: "AWS Partner: Generative AI Essentials – Business",
+    name: "AWS Generative AI Essentials",
     issuer: "Amazon Web Services",
-    date: "Nov 2023",
-  },
-  {
-    icon: "⚡",
-    name: "Jenkins: Automating Delivery Pipeline",
-    issuer: "Coursera",
-    date: "Apr 2022",
-  },
-  {
-    icon: "🔄",
-    name: "Agile Software Development",
-    issuer: "Coursera",
-    date: "Apr 2022",
-  },
-  {
-    icon: "🧩",
-    name: "Tricentis Tosca Automation Engineer",
-    issuer: "Tricentis",
-    date: "2022",
-  },
-  {
-    icon: "📋",
-    name: "qTest Specialist",
-    issuer: "Tricentis",
-    date: "2022",
   },
 ];
 
 export const projects: Project[] = [
   {
+    icon: "🛠️",
+    name: "PLATE — Test Infrastructure Platform",
+    period: "Jan 2026 – Present",
+    description:
+      "Independently built and maintained PLATE, a test infrastructure platform integrating CI/CD pipeline orchestration, BrowserStack mobile execution, and automated Jira/Xray workflow synchronization. Applied across multiple Inspire Brands projects (Sonic, BSL, Dunkin') as an ongoing personal tooling effort.",
+    tags: ["Java", "GitLab CI/CD", "BrowserStack", "Jira/Xray", "REST API", "Infrastructure"],
+  },
+  {
+    icon: "📱",
+    name: "Maestro E2E Framework — Sonic",
+    period: "Jan 2024 – Feb 2026",
+    description:
+      "Built a production Maestro end-to-end framework with smoke suites, shared flows, and critical-path coverage for Sonic's digital and POS systems. Introduced standardized runners (Playwright, Maestro AOS TE) reused across the Sonic testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.",
+    tags: ["Maestro", "Playwright", "BrowserStack", "GitLab CI/CD", "Java"],
+  },
+  {
     icon: "🎤",
     name: "Emotion Recognition from Speech",
     period: "Jan 2019 – Apr 2019",
     description:
-      "Built a machine learning system to classify emotions from speech audio using Support Vector Machine (SVM) in Python. Processed audio features and trained the model on labeled datasets to achieve reliable emotion detection.",
+      "Built a machine learning system to classify emotions from speech audio using Support Vector Machine (SVM) in Python. Processed audio features and trained the model on labeled datasets for reliable emotion detection.",
     tags: ["Python", "SVM", "Machine Learning", "Audio Processing", "scikit-learn"],
-  },
-  {
-    icon: "🚨",
-    name: "Panic Alarm Button",
-    period: "Feb 2018 – Apr 2018",
-    description:
-      "Designed and implemented an integrated circuit (IC) based panic alarm system as a hardware project, focusing on low-latency trigger response and reliable signal transmission for safety applications.",
-    tags: ["IC Design", "Embedded Systems", "Hardware", "Electronics"],
   },
 ];
