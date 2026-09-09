@@ -50,6 +50,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # `playwright install --with-deps` shells out to apt, so it hits the same
+      # broken Google Chrome source as the checks job and aborts with exit 100.
+      - name: Drop the runner's Google Chrome apt source
+        run: sudo rm -f /etc/apt/sources.list.d/google-chrome.list
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
