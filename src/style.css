@@ -903,3 +903,145 @@ html:not(.js-reveal) .project-card {
     transform: none;
   }
 }
+
+.typed-static {
+  display: none;
+}
+
+/* ===================================================================
+   Print
+   The page is laid out for scrolling, which prints badly: viewport-sized
+   spacing becomes dead paper, the fixed navbar repeats on every sheet,
+   cards split across page breaks, and the dark theme's near-white text
+   lands on white paper because browsers drop background colours.
+   =================================================================== */
+@media print {
+  /* Fixed and decorative elements repeat on every printed page. */
+  #navbar,
+  .skip-link,
+  .hero-scroll-hint,
+  .nav-toggle,
+  .cursor {
+    display: none !important;
+  }
+
+  /* Print dark-on-white rather than relying on background graphics. */
+  :root {
+    --bg: #fff;
+    --bg-card: #fff;
+    --bg-dark: #fff;
+    --text: #111;
+    --text-muted: #444;
+    --border: #bbb;
+    --accent: #3b34c4;
+  }
+  body {
+    background: #fff;
+    color: #111;
+  }
+  .section,
+  .section-dark,
+  #hero {
+    background: #fff !important;
+  }
+  .stat-card,
+  .timeline-card,
+  .skill-category,
+  .cert-card,
+  .project-card {
+    box-shadow: none !important;
+  }
+
+  /* Reclaim the space the scrolling layout reserves. `overflow: hidden` exists
+     to contain the decorative glow, but it becomes a clip path in the printed
+     PDF: the hero text stayed in the content stream (so it still copied and
+     searched) while being clipped away visually, leaving a blank first page. */
+  #hero {
+    /* Flex centring plus pagination pushed the hero's content above the first
+       page's printable area, leaving only a clipped sliver of it visible.
+       Block layout paginates predictably. */
+    display: block;
+    min-height: auto;
+    padding: 0 0 1rem;
+    overflow: visible;
+  }
+  .hero-content {
+    max-width: none;
+  }
+  .section {
+    padding: 1.25rem 0;
+  }
+
+  /* Never split a card across a page boundary. */
+  .timeline-item,
+  .skill-category,
+  .cert-card,
+  .project-card,
+  .stat-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* The hero's entrance animations are staggered up to about a second, so a
+     print captures them mid-flight: the name came out part-faded and the
+     summary at roughly 1% opacity. Force the finished state. These elements
+     declare opacity:0 in their base rule, so cancelling the animation on its
+     own would leave them invisible rather than visible. */
+  .hero-greeting,
+  .hero-name,
+  .hero-title,
+  .hero-summary,
+  .hero-actions,
+  .hero-socials {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Two values are written by JS on a timer, so a print catches whatever
+     frame it lands on: a half-typed phrase ("Softwa") and a mid-count stat
+     ("302+"). Print-time JS hooks are not dependable — beforeprint does not
+     fire in every headless path — so swap in static equivalents with CSS,
+     which needs no event at all. */
+  .typed-text,
+  .cursor {
+    display: none !important;
+  }
+  .typed-static {
+    display: inline;
+  }
+  .stat-number {
+    position: relative;
+    visibility: hidden;
+  }
+  .stat-number::after {
+    content: attr(data-target) '+';
+    position: absolute;
+    inset: 0;
+    visibility: visible;
+  }
+
+  /* Reveal anything the IntersectionObserver never reached, so printing a
+     page the reader has not scrolled through does not emit blank space. */
+  .timeline-item,
+  .skill-category,
+  .cert-card,
+  .project-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* A printed link is useless without its target. */
+  .project-link[href^='http']::after,
+  .project-live[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    font-weight: 400;
+    color: #555;
+    word-break: break-all;
+  }
+}

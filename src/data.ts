@@ -107,7 +107,7 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '🏗️',
     name: 'Infrastructure & CI/CD',
-    skills: ['GitLab CI/CD', 'BrowserStack', 'Docker', 'Gradle', 'Git', 'PLATE Platform'],
+    skills: ['GitLab CI/CD', 'BrowserStack', 'Docker', 'Gradle', 'Git'],
   },
   {
     icon: '📋',
@@ -117,7 +117,7 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '💻',
     name: 'Languages',
-    skills: ['Java', 'Python', 'SQL', 'Bash'],
+    skills: ['Java', 'Python', 'SQL'],
   },
   {
     icon: '🗄️',

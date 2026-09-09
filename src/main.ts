@@ -127,12 +127,14 @@ function animateCounter(el: HTMLElement, target: number, suffix = ''): void {
   }, step);
 }
 
+function counterFinalValue(el: HTMLElement): { target: number; suffix: string } {
+  const target = parseInt(el.dataset['target'] ?? '0', 10);
+  return { target, suffix: target >= 2 ? '+' : '' };
+}
+
 function initCounters(): void {
   const counters = document.querySelectorAll<HTMLElement>('.stat-number[data-target]');
-  const finalValue = (el: HTMLElement): { target: number; suffix: string } => {
-    const target = parseInt(el.dataset['target'] ?? '0', 10);
-    return { target, suffix: target >= 2 ? '+' : '' };
-  };
+  const finalValue = counterFinalValue;
 
   if (prefersReducedMotion()) {
     counters.forEach((el) => {

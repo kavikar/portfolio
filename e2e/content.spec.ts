@@ -81,6 +81,14 @@ test.describe('content rendering', () => {
     }
   });
 
+  test('the print-only static title stays hidden on screen', async ({ page }) => {
+    // It exists so printing never catches a half-typed phrase; on screen the
+    // animated span is the one that should show.
+    await page.goto('/');
+    await expect(page.locator('.typed-static')).toBeHidden();
+    await expect(page.locator('.typed-text')).toBeVisible();
+  });
+
   test('no anchor is nested inside another anchor', async ({ page }) => {
     await page.goto('/');
 
