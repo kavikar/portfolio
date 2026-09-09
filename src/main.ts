@@ -17,7 +17,7 @@ function initTyped(): void {
   let charIdx = 0;
   let deleting = false;
 
-  function tick() {
+  const tick = (): void => {
     const phrase = typedPhrases[phraseIdx];
     el.textContent = deleting
       ? phrase.substring(0, charIdx--)
@@ -36,7 +36,7 @@ function initTyped(): void {
     }
 
     setTimeout(tick, delay);
-  }
+  };
 
   tick();
 }
