@@ -6,12 +6,26 @@ const typedPhrases = [
   'Software Quality Engineer',
   'SDET',
   'Test Infrastructure Builder',
-  'AWS Cloud Practitioner',
+  'Platform & DevProd Engineer',
 ];
+
+/**
+ * Honours the OS-level "reduce motion" setting. Every animated behaviour below
+ * degrades to its finished state rather than being removed, so no content is
+ * hidden from anyone who opts out of motion.
+ */
+const prefersReducedMotion = (): boolean =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function initTyped(): void {
   const el = document.querySelector<HTMLSpanElement>('.typed-text');
   if (!el) return;
+
+  if (prefersReducedMotion()) {
+    el.textContent = typedPhrases[0];
+    document.querySelector('.cursor')?.remove();
+    return;
+  }
 
   let phraseIdx = 0;
   let charIdx = 0;
@@ -46,9 +60,13 @@ function initNavbar(): void {
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
 
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    },
+    { passive: true },
+  );
 
   // Mobile toggle
   const toggle = navbar.querySelector<HTMLButtonElement>('.nav-toggle');
@@ -58,27 +76,41 @@ function initNavbar(): void {
   });
 
   // Close on link click
-  links?.querySelectorAll('a').forEach(a => {
+  links?.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => links.classList.remove('open'));
   });
 }
 
 // ===== Scroll reveal =====
 function initScrollReveal(): void {
+  const targets = document.querySelectorAll(
+    '.timeline-item, .skill-category, .cert-card, .project-card',
+  );
+
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+
+  // Opt into the hidden starting state only now that the reveal is guaranteed
+  // to run; see the .js-reveal note in style.css.
+  document.documentElement.classList.add('js-reveal');
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry, i) => {
+      let staggered = 0;
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
+          const el = entry.target;
+          setTimeout(() => el.classList.add('visible'), staggered++ * 80);
+          observer.unobserve(el);
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   );
 
-  document.querySelectorAll('.timeline-item, .skill-category, .cert-card, .project-card')
-    .forEach(el => observer.observe(el));
+  targets.forEach((el) => observer.observe(el));
 }
 
 // ===== Counter animation =====
@@ -96,23 +128,35 @@ function animateCounter(el: HTMLElement, target: number, suffix = ''): void {
 }
 
 function initCounters(): void {
+  const counters = document.querySelectorAll<HTMLElement>('.stat-number[data-target]');
+  const finalValue = (el: HTMLElement): { target: number; suffix: string } => {
+    const target = parseInt(el.dataset['target'] ?? '0', 10);
+    return { target, suffix: target >= 2 ? '+' : '' };
+  };
+
+  if (prefersReducedMotion()) {
+    counters.forEach((el) => {
+      const { target, suffix } = finalValue(el);
+      el.textContent = target + suffix;
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement;
-          const target = parseInt(el.dataset['target'] ?? '0', 10);
-          const suffix = target >= 2 ? '+' : '';
+          const { target, suffix } = finalValue(el);
           animateCounter(el, target, suffix);
           observer.unobserve(el);
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.5 },
   );
 
-  document.querySelectorAll<HTMLElement>('.stat-number[data-target]')
-    .forEach(el => observer.observe(el));
+  counters.forEach((el) => observer.observe(el));
 }
 
 // ===== Render experience timeline =====
@@ -120,7 +164,9 @@ function renderTimeline(): void {
   const container = document.getElementById('timeline');
   if (!container) return;
 
-  container.innerHTML = experiences.map(exp => `
+  container.innerHTML = experiences
+    .map(
+      (exp) => `
     <div class="timeline-item">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
@@ -131,11 +177,13 @@ function renderTimeline(): void {
         <div class="timeline-company">${exp.company}</div>
         <p class="timeline-desc">${exp.description}</p>
         <div class="timeline-tags">
-          ${exp.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          ${exp.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
         </div>
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 // ===== Render skills =====
@@ -143,15 +191,19 @@ function renderSkills(): void {
   const container = document.getElementById('skills-grid');
   if (!container) return;
 
-  container.innerHTML = skillCategories.map(cat => `
+  container.innerHTML = skillCategories
+    .map(
+      (cat) => `
     <div class="skill-category">
       <div class="skill-cat-icon">${cat.icon}</div>
       <div class="skill-cat-name">${cat.name}</div>
       <div class="skill-items">
-        ${cat.skills.map(s => `<span class="skill-badge">${s}</span>`).join('')}
+        ${cat.skills.map((s) => `<span class="skill-badge">${s}</span>`).join('')}
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 // ===== Render certifications =====
@@ -159,7 +211,9 @@ function renderCertifications(): void {
   const container = document.getElementById('certs-grid');
   if (!container) return;
 
-  container.innerHTML = certifications.map(cert => `
+  container.innerHTML = certifications
+    .map(
+      (cert) => `
     <div class="cert-card">
       <div class="cert-icon">${cert.icon}</div>
       <div>
@@ -167,7 +221,9 @@ function renderCertifications(): void {
         <div class="cert-issuer">${cert.issuer}</div>
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 // ===== Render projects =====
@@ -175,19 +231,53 @@ function renderProjects(): void {
   const container = document.getElementById('projects-grid');
   if (!container) return;
 
-  container.innerHTML = projects.map(p => `
+  container.innerHTML = projects
+    .map((p) => {
+      // The card stays a <div>: an anchor-wrapped card cannot also contain the
+      // "Live demo" anchor, because nested <a> elements are invalid HTML and the
+      // parser silently splits the card into two siblings.
+      const title = p.url
+        ? `<a class="project-link" href="${p.url}" target="_blank" rel="noopener">` +
+          `${p.name}<span class="project-link-hint" aria-hidden="true">\u2197</span></a>`
+        : p.name;
+
+      const live = p.live
+        ? `<a class="project-live" href="${p.live}" target="_blank" rel="noopener">` +
+          `Live demo<span aria-hidden="true">\u2197</span></a>`
+        : '';
+
+      return `
     <div class="project-card">
       <div class="project-icon">${p.icon}</div>
       <div>
-        <div class="project-name">${p.name}</div>
+        <div class="project-name">${title}</div>
         <div class="project-period">${p.period}</div>
       </div>
       <p class="project-desc">${p.description}</p>
       <div class="project-tags">
-        ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        ${p.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
       </div>
+      ${live}
     </div>
-  `).join('');
+  `;
+    })
+    .join('');
+}
+
+// ===== Email (assembled at runtime to keep it out of the HTML source) =====
+function initEmail(): void {
+  document
+    .querySelectorAll<HTMLAnchorElement>('a[data-email-user][data-email-domain]')
+    .forEach((link) => {
+      const user = link.dataset['emailUser'];
+      const domain = link.dataset['emailDomain'];
+      if (!user || !domain) return;
+
+      const address = `${user}@${domain}`;
+      link.href = `mailto:${address}`;
+      const label = link.querySelector('.email-text');
+      if (label) label.textContent = address;
+    });
 }
 
 // ===== Footer year =====
@@ -206,6 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTyped();
   initNavbar();
   initCounters();
+  initEmail();
   setYear();
 
   // Scroll reveal runs after DOM is populated

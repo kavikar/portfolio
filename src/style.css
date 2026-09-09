@@ -1,22 +1,30 @@
 /* ===== Reset & Variables ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:          #0a0a0f;
-  --bg-card:     #12121a;
-  --bg-dark:     #080810;
-  --accent:      #6c63ff;
-  --accent-dim:  rgba(108, 99, 255, 0.15);
-  --accent2:     #00d4aa;
-  --text:        #e8e8f0;
-  --text-muted:  #8888aa;
-  --border:      rgba(255,255,255,0.07);
-  --radius:      12px;
-  --nav-h:       64px;
-  --transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-dark: #080810;
+  --accent: #6c63ff;
+  --accent-dim: rgba(108, 99, 255, 0.15);
+  --accent2: #00d4aa;
+  --text: #e8e8f0;
+  --text-muted: #8888aa;
+  --border: rgba(255, 255, 255, 0.07);
+  --radius: 12px;
+  --nav-h: 64px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -27,17 +35,29 @@ body {
 }
 
 /* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
 
 /* ===== Nav ===== */
 #navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: var(--nav-h);
   z-index: 100;
-  transition: background var(--transition), backdrop-filter var(--transition), box-shadow var(--transition);
+  transition:
+    background var(--transition),
+    backdrop-filter var(--transition),
+    box-shadow var(--transition);
 }
 #navbar.scrolled {
   background: rgba(10, 10, 15, 0.9);
@@ -74,15 +94,22 @@ body {
   font-weight: 500;
   transition: color var(--transition);
 }
-.nav-links a:hover { color: var(--text); }
+.nav-links a:hover {
+  color: var(--text);
+}
 .nav-links a.nav-cta {
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 0.4rem 1rem;
   border-radius: 6px;
-  transition: background var(--transition), color var(--transition);
+  transition:
+    background var(--transition),
+    color var(--transition);
 }
-.nav-links a.nav-cta:hover { background: var(--accent); color: #fff; }
+.nav-links a.nav-cta:hover {
+  background: var(--accent);
+  color: #fff;
+}
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -98,13 +125,23 @@ body {
   height: 2px;
   background: var(--text);
   border-radius: 2px;
-  transition: transform var(--transition), opacity var(--transition);
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
 }
 
 /* ===== Sections ===== */
-.section { padding: 6rem 0; }
-.section-dark { background: var(--bg-dark); }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section {
+  padding: 6rem 0;
+}
+.section-dark {
+  background: var(--bg-dark);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 .section-title {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 700;
@@ -139,7 +176,7 @@ body {
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 #hero::after {
@@ -149,7 +186,7 @@ body {
   left: -5%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 212, 170, 0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-content {
@@ -186,7 +223,15 @@ body {
   color: var(--accent);
   animation: blink 1s step-end infinite;
 }
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 .hero-summary {
   max-width: 540px;
   color: var(--text-muted);
@@ -219,13 +264,21 @@ body {
   background: var(--accent);
   color: #fff;
 }
-.btn-primary:hover { background: #5a52e0; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,99,255,0.35); }
+.btn-primary:hover {
+  background: #5a52e0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.35);
+}
 .btn-outline {
   border: 1px solid var(--border);
   color: var(--text);
   background: transparent;
 }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
 .hero-socials {
   display: flex;
   gap: 1rem;
@@ -243,8 +296,15 @@ body {
   color: var(--text-muted);
   transition: all var(--transition);
 }
-.hero-socials a svg { width: 18px; height: 18px; }
-.hero-socials a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.hero-socials a svg {
+  width: 18px;
+  height: 18px;
+}
+.hero-socials a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
 .hero-scroll-hint {
   position: absolute;
   bottom: 2rem;
@@ -267,7 +327,15 @@ body {
   background: linear-gradient(to bottom, var(--text-muted), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
-@keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 
 /* ===== About ===== */
 .about-grid {
@@ -281,7 +349,9 @@ body {
   margin-bottom: 1.25rem;
   font-size: 1.05rem;
 }
-.about-text p strong { color: var(--text); }
+.about-text p strong {
+  color: var(--text);
+}
 .about-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -293,9 +363,14 @@ body {
   border-radius: var(--radius);
   padding: 1.5rem;
   text-align: center;
-  transition: border-color var(--transition), transform var(--transition);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
 }
-.stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.stat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
 .stat-number {
   display: block;
   font-size: 2.5rem;
@@ -332,9 +407,14 @@ body {
   margin-bottom: 3rem;
   opacity: 0;
   transform: translateX(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
-.timeline-item.visible { opacity: 1; transform: translateX(0); }
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
 .timeline-dot {
   position: absolute;
   left: -2.5rem;
@@ -353,7 +433,9 @@ body {
   padding: 1.5rem 2rem;
   transition: border-color var(--transition);
 }
-.timeline-card:hover { border-color: rgba(108,99,255,0.3); }
+.timeline-card:hover {
+  border-color: rgba(108, 99, 255, 0.3);
+}
 .timeline-header {
   display: flex;
   justify-content: space-between;
@@ -395,7 +477,7 @@ body {
 .tag {
   font-size: 0.75rem;
   color: var(--text-muted);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border);
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
@@ -413,13 +495,23 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.5rem;
-  transition: border-color var(--transition), transform var(--transition);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.3s ease;
 }
-.skill-category.visible { opacity: 1; transform: translateY(0); }
-.skill-category:hover { border-color: rgba(108,99,255,0.3); }
+.skill-category.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.skill-category:hover {
+  border-color: rgba(108, 99, 255, 0.3);
+}
 .skill-cat-icon {
   font-size: 1.75rem;
   margin-bottom: 0.75rem;
@@ -440,13 +532,18 @@ body {
 .skill-badge {
   font-size: 0.8rem;
   color: var(--text-muted);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   padding: 0.3rem 0.7rem;
   border-radius: 20px;
-  transition: color var(--transition), border-color var(--transition);
+  transition:
+    color var(--transition),
+    border-color var(--transition);
 }
-.skill-badge:hover { color: var(--text); border-color: var(--accent); }
+.skill-badge:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
 
 /* ===== Certifications ===== */
 .certs-grid {
@@ -462,13 +559,24 @@ body {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  transition: border-color var(--transition), transform var(--transition);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.3s ease;
 }
-.cert-card.visible { opacity: 1; transform: translateY(0); }
-.cert-card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-4px); }
+.cert-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cert-card:hover {
+  border-color: rgba(108, 99, 255, 0.3);
+  transform: translateY(-4px);
+}
 .cert-icon {
   font-size: 2rem;
   flex-shrink: 0;
@@ -505,14 +613,27 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: border-color var(--transition), transform var(--transition);
+  transition:
+    border-color var(--transition),
+    transform var(--transition);
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    border-color 0.3s ease;
 }
-.project-card.visible { opacity: 1; transform: translateY(0); }
-.project-card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-4px); }
-.project-icon { font-size: 2rem; }
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card:hover {
+  border-color: rgba(108, 99, 255, 0.3);
+  transform: translateY(-4px);
+}
+.project-icon {
+  font-size: 2rem;
+}
 .project-name {
   font-size: 1.1rem;
   font-weight: 600;
@@ -523,11 +644,21 @@ body {
   font-size: 0.75rem;
   color: var(--text-muted);
 }
-.project-desc { color: var(--text-muted); font-size: 0.95rem; flex: 1; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.project-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  flex: 1;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
 
 /* ===== Contact ===== */
-.contact-wrapper { max-width: 640px; }
+.contact-wrapper {
+  max-width: 640px;
+}
 .contact-info p {
   color: var(--text-muted);
   font-size: 1.05rem;
@@ -547,8 +678,15 @@ body {
   font-size: 1rem;
   transition: color var(--transition);
 }
-.contact-item svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--accent); }
-.contact-item:hover { color: var(--text); }
+.contact-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.contact-item:hover {
+  color: var(--text);
+}
 
 /* ===== Footer ===== */
 footer {
@@ -561,8 +699,14 @@ footer {
 
 /* ===== Animations ===== */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== Responsive ===== */
@@ -571,7 +715,7 @@ footer {
     display: none;
     position: fixed;
     inset: var(--nav-h) 0 0 0;
-    background: rgba(10,10,15,0.97);
+    background: rgba(10, 10, 15, 0.97);
     backdrop-filter: blur(12px);
     flex-direction: column;
     justify-content: center;
@@ -579,14 +723,148 @@ footer {
     gap: 2rem;
     font-size: 1.2rem;
   }
-  .nav-links.open { display: flex; }
-  .nav-toggle { display: flex; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .about-stats { grid-template-columns: 1fr 1fr; }
-  .hero-scroll-hint { display: none; }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-scroll-hint {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
-  .about-stats { grid-template-columns: 1fr 1fr; }
-  .projects-grid, .skills-grid, .certs-grid { grid-template-columns: 1fr; }
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .projects-grid,
+  .skills-grid,
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================================
+   Accessibility
+   =================================================================== */
+
+/* Skip link: visually hidden until focused, then pinned to the top-left. */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-decoration: none;
+}
+.skip-link:focus-visible {
+  top: 0;
+}
+
+/* A single visible focus ring for every interactive element. Uses
+   :focus-visible so it appears for keyboard users without adding a ring
+   on mouse clicks. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Linked project cards */
+.project-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.3s ease;
+}
+.project-link:hover {
+  color: var(--accent);
+}
+.project-link-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+.project-link:hover .project-link-hint {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+.project-live {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid rgba(108, 99, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  transition: background 0.3s ease;
+}
+.project-live:hover {
+  background: rgba(108, 99, 255, 0.12);
+}
+
+/* ===================================================================
+   Reveal-on-scroll is progressive enhancement.
+   The hidden starting state is applied only once JS has confirmed it can
+   run the reveal, so a JS failure (or a blocked bundle) leaves the page
+   fully readable instead of blank. main.ts adds .js-reveal to <html>.
+   =================================================================== */
+html:not(.js-reveal) .timeline-item,
+html:not(.js-reveal) .skill-category,
+html:not(.js-reveal) .cert-card,
+html:not(.js-reveal) .project-card {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===================================================================
+   Reduced motion
+   Content is never hidden here — animated elements are pinned to their
+   finished state rather than removed. JS mirrors this in main.ts.
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .timeline-item,
+  .skill-category,
+  .cert-card,
+  .project-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .project-card:hover,
+  .project-card-linked:hover .project-link-hint {
+    transform: none;
+  }
 }
