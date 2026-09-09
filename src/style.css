@@ -103,12 +103,29 @@ body {
   justify-content: space-between;
 }
 .nav-logo {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: var(--accent);
+  display: inline-flex;
   text-decoration: none;
-  letter-spacing: 2px;
+  line-height: 0;
+}
+.nav-logo svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: url(#navmark);
+  stroke-width: 6;
+  stroke-linejoin: round;
+  transition: transform var(--transition);
+}
+.nav-logo svg .mark-inner {
+  stroke-width: 2;
+  opacity: 0.38;
+}
+.nav-logo svg .mark-letter {
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.nav-logo:hover svg {
+  transform: scale(1.06);
 }
 .nav-links {
   list-style: none;
@@ -369,7 +386,9 @@ body {
 /* ===== About ===== */
 .about-grid {
   display: grid;
-  grid-template-columns: 240px 1fr 1fr;
+  /* The bio needs more room than the stat boxes; equal 1fr columns squeezed
+     four paragraphs into a 400px ribbon at 1440px wide. */
+  grid-template-columns: 220px minmax(0, 1.55fr) minmax(0, 1fr);
   gap: 3rem;
   align-items: start;
 }
@@ -589,8 +608,11 @@ body {
 /* ===== Certifications ===== */
 .certs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* auto-fill packed four cards into three columns and stranded the fourth on
+     its own row. An even two-up keeps the section balanced at any count. */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
+  max-width: 900px;
 }
 .cert-card {
   background: var(--bg-card);

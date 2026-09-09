@@ -87,7 +87,24 @@
     <!-- Nav -->
     <nav id="navbar">
       <div class="nav-inner">
-        <a href="#hero" class="nav-logo">KV</a>
+        <a href="#hero" class="nav-logo" aria-label="Karthik Vakkalagadda — home">
+          <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="navmark" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9d96ff" />
+                <stop offset=".5" stop-color="#6c63ff" />
+                <stop offset="1" stop-color="#00d4aa" />
+              </linearGradient>
+            </defs>
+            <path d="M50 5 L88 27 L88 73 L50 95 L12 73 L12 27 Z" />
+            <path
+              class="mark-inner"
+              d="M50 18 L77 33.5 L77 66.5 L50 82 L23 66.5 L23 33.5 Z"
+            />
+            <path class="mark-letter" d="M35 34 L35 66 M35 51 L51 34 M35 49 L51 66" />
+            <path class="mark-letter" d="M54 34 L64 66 L74 34" />
+          </svg>
+        </a>
         <button class="nav-toggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
@@ -194,8 +211,9 @@
                 device execution and test-management sync each lived somewhere different,
                 and nothing joined them up. I designed the architecture, wrote it, and
                 still own it as its primary contributor — it now runs across multiple
-                production brand projects. The Maestro E2E framework was the same story:
-                none existed, so I built one, with smoke suites, shared flows,
+                production brand projects at <strong>Inspire Brands</strong>, including
+                Sonic, BSL and Dunkin&rsquo;. The Maestro E2E framework was the same
+                story: none existed, so I built one, with smoke suites, shared flows,
                 critical-path coverage and standardized runners other teams reuse.
               </p>
               <p>
