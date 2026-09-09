@@ -156,6 +156,14 @@ export const certifications: Certification[] = [
 
 export const projects: Project[] = [
   {
+    icon: '🎭',
+    name: 'Agent-Based Playwright Framework',
+    period: '2026',
+    description:
+      'A Playwright automation framework built around agents and skills rather than a fixed script library. Agents draw on a knowledge base of project context that is refreshed on an ongoing basis, and integrate with Jira and Xray so cases, runs and results stay in sync without manual bookkeeping. Individual skills handle specific jobs — a locator doctor that diagnoses and repairs failing selectors, a regression planner that scopes which suites a change actually warrants — with more added as patterns repeat.',
+    tags: ['Playwright', 'AI Agents', 'Jira/Xray', 'Knowledge Base', 'Test Automation'],
+  },
+  {
     icon: '🛠️',
     name: 'Test Infrastructure Platform',
     period: 'Jan 2026 – Present',
