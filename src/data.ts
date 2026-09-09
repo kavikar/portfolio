@@ -148,16 +148,6 @@ export const certifications: Certification[] = [
     issuer: 'Tricentis',
   },
   {
-    icon: '📊',
-    name: 'qTest Specialist',
-    issuer: 'Tricentis',
-  },
-  {
-    icon: '🤝',
-    name: 'RPA Specialist',
-    issuer: 'Tricentis',
-  },
-  {
     icon: '🎓',
     name: 'Harvard ManageMentor',
     issuer: 'Harvard Business School',
@@ -182,10 +172,10 @@ export const projects: Project[] = [
   },
   {
     icon: '📱',
-    name: 'Maestro E2E Framework — Sonic',
-    period: 'Jan 2024 – Feb 2026',
+    name: 'Maestro E2E Framework',
+    period: '2026',
     description:
-      "Built a production Maestro end-to-end framework with smoke suites, shared flows, and critical-path coverage for Sonic's digital and POS systems. Introduced standardized runners (Playwright, Maestro AOS TE) reused across the Sonic testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.",
+      'Built a production Maestro end-to-end framework with smoke suites, shared flows and critical-path coverage across digital ordering and POS systems. Introduced standardized runners (Playwright, Maestro AOS TE) reused across the wider testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.',
     tags: ['Maestro', 'Playwright', 'BrowserStack', 'GitLab CI/CD', 'Java'],
   },
   {
