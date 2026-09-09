@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "check:resume": "node scripts/check-resume.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

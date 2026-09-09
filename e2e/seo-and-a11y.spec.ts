@@ -59,6 +59,19 @@ test.describe('contact privacy', () => {
     expect(source).not.toMatch(/tel:/);
     expect(source).not.toMatch(/\d{3}[.\- ]\d{3}[.\- ]\d{4}/);
   });
+
+  test('the resume is served as a PDF', async ({ request }) => {
+    const res = await request.get('/Karthik_Vakkalagadda_Resume.pdf');
+    expect(res.status()).toBe(200);
+    expect(res.headers()['content-type']).toContain('pdf');
+    expect((await res.body()).length).toBeGreaterThan(10_000);
+  });
+
+  // The PDF's *contents* cannot be checked from here: its text sits in
+  // FlateDecode streams using subsetted font encodings, so asserting on the
+  // response bytes silently passes whatever the file contains. That check
+  // lives in scripts/check-resume.mjs, which uses a real text extractor and
+  // runs in CI.
 });
 
 test.describe('accessibility', () => {

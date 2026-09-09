@@ -24,6 +24,10 @@ jobs:
       - run: npm run format:check
       - run: npm run typecheck
       - run: npm run build
+      # Guards the published resume PDF against re-introducing a phone number.
+      # Needs a real PDF text extractor; see scripts/check-resume.mjs.
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - run: npm run check:resume
 
   e2e:
     name: End-to-end

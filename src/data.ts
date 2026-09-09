@@ -32,21 +32,28 @@ export interface Project {
 
 export const experiences: Experience[] = [
   {
-    role: 'QA Automation Engineer',
+    role: 'QA Lead — PLATE QA Platform / Sonic E2E',
     company: 'Inspire Brands (via Capgemini) — Atlanta, GA',
-    period: 'May 2023 – Present',
+    period: 'Jan 2024 – Present',
     description:
-      "Independently architected PLATE, a test infrastructure platform integrating CI/CD pipeline orchestration, BrowserStack mobile execution, and automated Jira/Xray workflow sync — applied across multiple brand projects. Built the Maestro E2E framework for Sonic with smoke suites, shared flows, and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently contributing to Dunkin' loyalty resiliency and Fiserv payment error mapping.",
+      "Architected and own PLATE, an enterprise QA automation platform, as its primary contributor — driving architecture across test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling including prompt-driven automation runners and EPIC/TE testcase generation, and Snowflake dashboards giving stakeholders data-driven visibility into release readiness. Built the Maestro E2E framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently contributing to Dunkin' loyalty resiliency and Fiserv payment error mapping.",
     tags: [
       'Java',
       'Maestro',
       'BrowserStack',
       'GitLab CI/CD',
       'Jira/Xray',
-      'Rest Assured',
-      'SQL',
-      'MongoDB',
+      'Snowflake',
+      'AI-Assisted QA',
     ],
+  },
+  {
+    role: 'E2E POS QA Engineer — Sonic POS & Digital',
+    company: 'Inspire Brands (via Capgemini) — Atlanta, GA',
+    period: 'May 2023 – Dec 2023',
+    description:
+      'Validated integrations between digital ordering platforms and POS systems (Micros, Infor) across ordering, payment and pricing workflows, ensuring calculation accuracy before production release. Performed backend API testing with Rest Assured and validated data integrity using SQL and MongoDB. Gathered test requirements from stakeholders and authored detailed manual test plans for UAT cycles, defining the quality metrics used to sign off on release readiness for in-store operations at scale.',
+    tags: ['Rest Assured', 'SQL', 'MongoDB', 'POS Integration', 'UAT', 'Test Planning'],
   },
   {
     role: 'QA Automation Engineer — BWW Choice',
@@ -88,6 +95,7 @@ export const skillCategories: SkillCategory[] = [
     name: 'Test Automation',
     skills: [
       'Selenium WebDriver',
+      'Playwright',
       'Appium',
       'Rest Assured',
       'Maestro',
@@ -99,12 +107,12 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '🏗️',
     name: 'Infrastructure & CI/CD',
-    skills: ['GitLab CI/CD', 'BrowserStack', 'Gradle', 'Git', 'PLATE Platform'],
+    skills: ['GitLab CI/CD', 'BrowserStack', 'Docker', 'Gradle', 'Git', 'PLATE Platform'],
   },
   {
     icon: '📋',
     name: 'Test Management',
-    skills: ['Jira', 'Xray', 'Test Planning', 'Defect Tracking', 'Agile/Scrum'],
+    skills: ['Jira', 'Xray', 'qTest', 'ReportPortal', 'Test Planning', 'Defect Tracking'],
   },
   {
     icon: '💻',
@@ -114,12 +122,12 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '🗄️',
     name: 'Data & APIs',
-    skills: ['REST APIs', 'Postman', 'SQL', 'MongoDB', 'API Automation'],
+    skills: ['REST APIs', 'Postman', 'SQL', 'MongoDB', 'Snowflake', 'API Automation'],
   },
   {
     icon: '☁️',
     name: 'Cloud & Tools',
-    skills: ['AWS', 'BrowserStack', 'MongoDB', 'Git', 'Postman'],
+    skills: ['AWS', 'Docker', 'BrowserStack', 'Snowflake', 'Git', 'Postman'],
   },
 ];
 
@@ -133,6 +141,26 @@ export const certifications: Certification[] = [
     icon: '🤖',
     name: 'AWS Generative AI Essentials',
     issuer: 'Amazon Web Services',
+  },
+  {
+    icon: '🎯',
+    name: 'Tosca Automation Specialist (L1) & TQL',
+    issuer: 'Tricentis',
+  },
+  {
+    icon: '📊',
+    name: 'qTest Specialist',
+    issuer: 'Tricentis',
+  },
+  {
+    icon: '🤝',
+    name: 'RPA Specialist',
+    issuer: 'Tricentis',
+  },
+  {
+    icon: '🎓',
+    name: 'Harvard ManageMentor',
+    issuer: 'Harvard Business School',
   },
 ];
 
