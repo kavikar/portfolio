@@ -32,11 +32,11 @@ export interface Project {
 
 export const experiences: Experience[] = [
   {
-    role: 'QA Lead — PLATE QA Platform / Sonic E2E',
+    role: 'QA Lead — Test Platform & End-to-End Automation',
     company: 'Inspire Brands (via Capgemini) — Atlanta, GA',
     period: 'Jan 2024 – Present',
     description:
-      "Architected and own PLATE, an enterprise QA automation platform, as its primary contributor — driving architecture across test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling including prompt-driven automation runners and EPIC/TE testcase generation, and Snowflake dashboards giving stakeholders data-driven visibility into release readiness. Built the Maestro E2E framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently contributing to Dunkin' loyalty resiliency and Fiserv payment error mapping.",
+      'Architected and own the test automation platform for the account as its primary contributor, driving architecture across test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling — prompt-driven automation runners and automated test-case generation — cutting manual authoring effort, and Snowflake dashboards giving stakeholders data-driven visibility into release readiness. Built the Maestro end-to-end framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently work on loyalty-platform resiliency and payment error handling.',
     tags: [
       'Java',
       'Maestro',
@@ -56,11 +56,11 @@ export const experiences: Experience[] = [
     tags: ['Rest Assured', 'SQL', 'MongoDB', 'POS Integration', 'UAT', 'Test Planning'],
   },
   {
-    role: 'QA Automation Engineer — BWW Choice',
+    role: 'QA Automation Engineer — In-Store Dining Platform',
     company: 'Inspire Brands (via Capgemini) — Bengaluru, India',
     period: 'May 2022 – Apr 2023',
     description:
-      'Led automation efforts for Buffalo Wild Wings Choice, a new in-store restaurant experience initiative. Automated web and mobile features using Java, Selenium, Appium, and Cucumber BDD. Implemented API automation with Rest Assured and database validations with SQL. Coordinated task assignments across the team.',
+      'Led automation for a new in-store dining experience at Buffalo Wild Wings. Automated web and mobile features using Java, Selenium, Appium, and Cucumber BDD. Implemented API automation with Rest Assured and database validations with SQL. Coordinated task assignments across the team.',
     tags: ['Java', 'Selenium', 'Appium', 'Cucumber BDD', 'Rest Assured', 'SQL'],
   },
   {
@@ -157,10 +157,10 @@ export const certifications: Certification[] = [
 export const projects: Project[] = [
   {
     icon: '🛠️',
-    name: 'PLATE — Test Infrastructure Platform',
+    name: 'Test Infrastructure Platform',
     period: 'Jan 2026 – Present',
     description:
-      "Independently built and maintained PLATE, a test infrastructure platform integrating CI/CD pipeline orchestration, BrowserStack mobile execution, and automated Jira/Xray workflow synchronization. Applied across multiple Inspire Brands projects (Sonic, BSL, Dunkin') as an ongoing personal tooling effort.",
+      "Designed and built a test infrastructure platform end to end: CI/CD pipeline orchestration, BrowserStack mobile execution and automated Jira/Xray workflow synchronization in one place, replacing three disconnected manual steps. Adopted across multiple Inspire Brands projects (Sonic, Buffalo Wild Wings, Dunkin').",
     tags: [
       'Java',
       'GitLab CI/CD',
@@ -175,7 +175,7 @@ export const projects: Project[] = [
     name: 'Maestro E2E Framework',
     period: '2026',
     description:
-      'Built a production Maestro end-to-end framework with smoke suites, shared flows and critical-path coverage across digital ordering and POS systems. Introduced standardized runners (Playwright, Maestro AOS TE) reused across the wider testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.',
+      'Built a production Maestro end-to-end framework with smoke suites, shared flows and critical-path coverage across digital ordering and POS systems. Introduced standardized runners reused across the wider testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.',
     tags: ['Maestro', 'Playwright', 'BrowserStack', 'GitLab CI/CD', 'Java'],
   },
   {

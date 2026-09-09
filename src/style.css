@@ -466,7 +466,14 @@ body {
   top: 8px;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
+  /* Held well below full accent brightness. At full strength the red reads as
+     a warning stripe down the page and pulls focus off the cards, where the
+     old purple at the same opacity did not. */
+  background: linear-gradient(
+    to bottom,
+    rgba(244, 63, 94, 0.45),
+    rgba(244, 63, 94, 0.08)
+  );
 }
 .timeline-item {
   position: relative;
@@ -483,14 +490,17 @@ body {
 }
 .timeline-dot {
   position: absolute;
-  left: -2.5rem;
-  top: 6px;
-  width: 12px;
-  height: 12px;
+  /* Centred on the 2px rule: the item's box starts at the 2rem padding, so the
+     dot must sit back by that plus half its own width to land on the line.
+     At -2.5rem its centre was three pixels adrift, which read as a wobble. */
+  left: calc(-2rem - 4px);
+  top: 7px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--accent);
-  border: 2px solid var(--bg-dark);
-  box-shadow: 0 0 0 4px var(--accent-dim);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
 }
 .timeline-card {
   background: var(--bg-card);
