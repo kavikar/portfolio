@@ -340,9 +340,21 @@ body {
 /* ===== About ===== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 240px 1fr 1fr;
+  gap: 3rem;
   align-items: start;
+}
+.about-photo {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 0 0 1px rgba(108, 99, 255, 0.12),
+    0 18px 40px rgba(0, 0, 0, 0.45);
 }
 .about-text p {
   color: var(--text-muted);
@@ -714,9 +726,21 @@ footer {
   .nav-links {
     display: none;
     position: fixed;
-    inset: var(--nav-h) 0 0 0;
-    background: rgba(10, 10, 15, 0.97);
-    backdrop-filter: blur(12px);
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    /* Sized explicitly rather than with `bottom: 0`. #navbar.scrolled sets
+       backdrop-filter, which makes it the containing block for fixed-position
+       descendants, so `bottom` would resolve against the 64px-tall navbar and
+       collapse this overlay to zero height. */
+    height: calc(100vh - var(--nav-h));
+    height: calc(100dvh - var(--nav-h));
+    overflow-y: auto;
+    /* Fully opaque, and no backdrop-filter of its own. #navbar.scrolled is
+       already backdrop-filtered, and nesting a second one composites the
+       page through this overlay, leaving the menu text competing with the
+       content behind it. */
+    background: var(--bg);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -731,7 +755,18 @@ footer {
   }
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
+    justify-items: center;
+  }
+  .about-media {
+    justify-self: center;
+  }
+  .about-photo {
+    max-width: 200px;
+  }
+  .about-text,
+  .about-stats {
+    width: 100%;
   }
   .about-stats {
     grid-template-columns: 1fr 1fr;
