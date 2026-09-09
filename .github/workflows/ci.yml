@@ -28,14 +28,18 @@ jobs:
       # Needs a real PDF text extractor; see scripts/check-resume.mjs.
       - name: Install PDF text extractor
         run: |
-          # Runners ship a Google Chrome apt source that intermittently serves a
-          # bad index. It is unrelated to this package, so drop it and tolerate a
-          # partial update rather than letting it fail the job. A genuinely
-          # missing package still fails loudly on the install below, and
-          # check:resume refuses to pass without the tool when CI is set.
-          sudo rm -f /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update -qq || true
+          # Runners ship a Google Chrome apt source that intermittently serves an
+          # index with a hash-sum mismatch, which fails `apt-get update` with exit
+          # 100 and takes unrelated installs down with it. Match by content, not
+          # filename: Ubuntu 24.04 uses the deb822 *.sources format, so removing
+          # only google-chrome.list silently leaves the source in place.
+          sudo grep -rlE 'dl\.google\.com|google-chrome' \
+            /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null \
+            | sudo xargs -r rm -vf
+          sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils
+          # check:resume refuses to pass without this tool when CI is set, so a
+          # silent failure here cannot degrade the guard into a no-op.
           pdftotext -v
       - run: npm run check:resume
 
@@ -53,7 +57,15 @@ jobs:
       # `playwright install --with-deps` shells out to apt, so it hits the same
       # broken Google Chrome source as the checks job and aborts with exit 100.
       - name: Drop the runner's Google Chrome apt source
-        run: sudo rm -f /etc/apt/sources.list.d/google-chrome.list
+        run: |
+          # Runners ship a Google Chrome apt source that intermittently serves an
+          # index with a hash-sum mismatch, which fails `apt-get update` with exit
+          # 100 and takes unrelated installs down with it. Match by content, not
+          # filename: Ubuntu 24.04 uses the deb822 *.sources format, so removing
+          # only google-chrome.list silently leaves the source in place.
+          sudo grep -rlE 'dl\.google\.com|google-chrome' \
+            /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null \
+            | sudo xargs -r rm -vf
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
