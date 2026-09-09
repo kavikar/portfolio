@@ -26,7 +26,17 @@ jobs:
       - run: npm run build
       # Guards the published resume PDF against re-introducing a phone number.
       # Needs a real PDF text extractor; see scripts/check-resume.mjs.
-      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Install PDF text extractor
+        run: |
+          # Runners ship a Google Chrome apt source that intermittently serves a
+          # bad index. It is unrelated to this package, so drop it and tolerate a
+          # partial update rather than letting it fail the job. A genuinely
+          # missing package still fails loudly on the install below, and
+          # check:resume refuses to pass without the tool when CI is set.
+          sudo rm -f /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update -qq || true
+          sudo apt-get install -y -qq poppler-utils
+          pdftotext -v
       - run: npm run check:resume
 
   e2e:
