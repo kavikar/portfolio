@@ -119,10 +119,11 @@ test.describe('content rendering', () => {
 
 test.describe('page health', () => {
   test('loads with no console errors or failed requests', async ({ page }) => {
-    // Stub Google Fonts so the assertion measures this site, not the network.
-    // Without this the suite fails wherever fonts.googleapis.com is unreachable.
-    await page.route(/fonts\.(googleapis|gstatic)\.com/, (route) =>
-      route.fulfill({ status: 200, contentType: 'text/css', body: '' }),
+    // Vercel serves the analytics script from its own infrastructure, so the
+    // path 404s anywhere else and logs a console error that carries no URL to
+    // filter on. Stub it, so this measures the site rather than the platform.
+    await page.route('**/_vercel/insights/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
     );
 
     const problems: string[] = [];
@@ -132,8 +133,8 @@ test.describe('page health', () => {
     );
     page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
     page.on('response', (r) => {
-      // Google Fonts is third-party; a network hiccup there is not a site defect.
-      if (r.status() >= 400 && new URL(r.url()).origin === new URL(page.url()).origin) {
+      const url = new URL(r.url());
+      if (r.status() >= 400 && url.origin === new URL(page.url()).origin) {
         problems.push(`${r.status()} ${r.url()}`);
       }
     });
@@ -142,6 +143,32 @@ test.describe('page health', () => {
     await scrollThrough(page);
 
     expect(problems).toEqual([]);
+  });
+
+  test('fonts are self-hosted, with no third-party requests', async ({ page }) => {
+    const external: string[] = [];
+    page.on('request', (r) => {
+      const host = new URL(r.url()).hostname;
+      if (host !== 'localhost' && host !== '127.0.0.1') external.push(r.url());
+    });
+
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.evaluate(() => document.fonts.ready);
+
+    // A third-party font host costs a DNS lookup, TLS handshake and round trip
+    // before text can paint, and hands the visitor's IP to that third party.
+    expect(external.filter((u) => /fonts\.(googleapis|gstatic)\.com/.test(u))).toEqual(
+      [],
+    );
+
+    // The declared families must actually be loaded, not silently falling back.
+    const loaded = await page.evaluate(() =>
+      [...document.fonts].map((f) => `${f.family}|${f.status}`),
+    );
+    expect(loaded).toEqual(expect.arrayContaining([expect.stringContaining('Inter')]));
+    expect(loaded).toEqual(
+      expect.arrayContaining([expect.stringContaining('JetBrains Mono')]),
+    );
   });
 
   test('serves favicon, robots.txt and sitemap.xml', async ({ request }) => {

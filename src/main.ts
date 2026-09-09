@@ -1,3 +1,4 @@
+import { inject } from '@vercel/analytics';
 import './style.css';
 import { experiences, skillCategories, certifications, projects } from './data.js';
 
@@ -282,6 +283,19 @@ function initEmail(): void {
     });
 }
 
+// ===== Analytics =====
+/**
+ * Vercel Web Analytics. The documented setup is a React component; this site has
+ * no React, so the package's plain-JS inject() is used instead.
+ *
+ * Only runs on the deployed site: in dev it would otherwise log warnings about
+ * an endpoint that does not exist locally.
+ */
+function initAnalytics(): void {
+  if (import.meta.env.DEV) return;
+  inject();
+}
+
 // ===== Footer year =====
 function setYear(): void {
   const el = document.getElementById('year');
@@ -299,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCounters();
   initEmail();
+  initAnalytics();
   setYear();
 
   // Scroll reveal runs after DOM is populated
