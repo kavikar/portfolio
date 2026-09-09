@@ -916,6 +916,16 @@ html:not(.js-reveal) .project-card {
    lands on white paper because browsers drop background colours.
    =================================================================== */
 @media print {
+  /* Printed output must never depend on timing. Without this, switching to
+     print media *animates* the reveal cards from opacity 0 to 1 over 0.5s,
+     because they declare a transition on opacity — so a print taken during
+     that window captures half-transparent content. */
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+
   /* Fixed and decorative elements repeat on every printed page. */
   #navbar,
   .skip-link,
