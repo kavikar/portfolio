@@ -201,8 +201,8 @@ export const projects: Project[] = [
     name: 'Cricket Field Planner',
     period: '2026',
     description:
-      'Cricket field planning app in two forms: a Kotlin Android app and a React + TypeScript web version. Drag fielders around an interactive pitch, validate placements against ICC fielding regulations for T20/ODI/Test, mirror the field for left-handed batters, and export a tactical plan. AI advice runs through a Cloudflare Pages Function so the API key stays server-side.',
-    tags: ['Kotlin', 'React', 'TypeScript', 'Cloudflare Pages', 'Gemini API'],
+      'Cricket field planning app in two forms: a Kotlin Android app (published to Google Play closed testing) and a React + TypeScript web version. Drag fielders around an interactive pitch, validate placements against ICC fielding regulations for T20/ODI/Test, mirror the field for left-handed batters, and export a tactical plan. AI advice is bring-your-own-key, calling the Gemini API directly from the browser so no server ever sees a visitor\'s API key.',
+    tags: ['Kotlin', 'Android', 'React', 'TypeScript', 'Cloudflare Pages', 'Gemini API'],
     url: 'https://github.com/kavikar/CricketFieldPlanner/tree/main/web',
     live: 'https://cricketfieldplanner.com',
   },
