@@ -2,8 +2,11 @@
    Fonts — self-hosted
    Previously loaded from Google Fonts, which cost a third-party DNS lookup,
    TLS handshake and round trip before any text could paint, and sent every
-   visitor's IP to a third party. These are the latin variable cuts from
-   Fontsource: two files covering every weight in use, hashed by the build.
+   visitor's IP to a third party. These are the latin variable cuts taken from
+   Fontsource (@fontsource-variable/inter and .../jetbrains-mono, v5.3.0): two
+   files covering every weight in use, hashed by the build. The packages are
+   not dependencies — only these two files are needed, where importing the
+   package pulls 42 subset files for Inter alone.
    =================================================================== */
 @font-face {
   font-family: 'Inter';
@@ -95,7 +98,7 @@ body {
     box-shadow var(--transition);
 }
 #navbar.scrolled {
-  background: rgba(10, 10, 15, 0.9);
+  background: rgba(13, 10, 12, 0.9);
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--border);
 }
@@ -238,7 +241,7 @@ body {
   left: -5%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0, 212, 170, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(224, 164, 88, 0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-content {
@@ -672,11 +675,6 @@ body {
   color: var(--accent2);
   margin-bottom: 0.25rem;
 }
-.cert-date {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-family: 'JetBrains Mono', monospace;
-}
 
 /* ===== Projects ===== */
 .projects-grid {
@@ -965,10 +963,7 @@ html:not(.js-reveal) .project-card {
     transform: none !important;
   }
 
-  .project-card:hover,
-  .project-card-linked:hover .project-link-hint {
-    transform: none;
-  }
+  .project-card: hover;
 }
 
 .typed-static {
@@ -991,6 +986,15 @@ html:not(.js-reveal) .project-card {
   *::before,
   *::after {
     transition: none !important;
+  }
+
+  /* The hero's decorative radial glows are absolutely positioned and paint
+     over its text in the printed output, leaving the name, title, summary and
+     buttons blank on page one while still sitting in the PDF's text layer.
+     They are pure screen ornament and have no business on paper. */
+  #hero::before,
+  #hero::after {
+    display: none !important;
   }
 
   /* Fixed and decorative elements repeat on every printed page. */
@@ -1027,6 +1031,15 @@ html:not(.js-reveal) .project-card {
   .cert-card,
   .project-card {
     box-shadow: none !important;
+  }
+
+  /* Filled buttons carry white labels on a background browsers drop when
+     printing, so the label came out white on white. Give them the same
+     outline treatment as the secondary buttons. */
+  .btn-primary {
+    background: transparent !important;
+    color: #111 !important;
+    border: 1px solid #999;
   }
 
   /* Reclaim the space the scrolling layout reserves. `overflow: hidden` exists

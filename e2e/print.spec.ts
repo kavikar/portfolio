@@ -15,6 +15,29 @@ test.describe('print layout', () => {
     await expect(page.locator('.hero-scroll-hint')).toBeHidden();
   });
 
+  test('decorative hero glows are not printed', async ({ page }) => {
+    // They are absolutely positioned and paint over the hero in the printed
+    // output: the name, title, summary and buttons came out blank on page one
+    // while still being present in the PDF's text layer, so the text was
+    // selectable but invisible.
+    for (const pseudo of ['::before', '::after']) {
+      const display = await page
+        .locator('#hero')
+        .evaluate((el, p) => getComputedStyle(el, p).display, pseudo);
+      expect(display, `#hero${pseudo} must not print`).toBe('none');
+    }
+  });
+
+  test('filled buttons keep a readable label on paper', async ({ page }) => {
+    // The fill is dropped when printing, so a white label lands on white paper.
+    const { color } = await page.locator('.btn-primary').evaluate((el) => ({
+      color: getComputedStyle(el).color,
+    }));
+    const [r, g, b] = (color.match(/\d+/g) ?? []).slice(0, 3).map(Number);
+    const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    expect(luminance, 'primary button label must be dark ink').toBeLessThan(0.4);
+  });
+
   test('text is dark on white, not the screen theme', async ({ page }) => {
     // Browsers drop background colours when printing, so near-white body text
     // would land on white paper.
