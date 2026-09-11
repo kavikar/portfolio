@@ -201,10 +201,25 @@ export const projects: Project[] = [
     name: 'Cricket Field Planner',
     period: '2026',
     description:
-      "Cricket field planning app in two forms: a Kotlin Android app (published to Google Play closed testing) and a React + TypeScript web version. Drag fielders around an interactive pitch, validate placements against ICC fielding regulations for T20/ODI/Test, mirror the field for left-handed batters, and export a tactical plan. AI advice is bring-your-own-key, calling the Gemini API directly from the browser so no server ever sees a visitor's API key.",
+      "Cricket field planning app in two forms: a Kotlin Android app (published to Google Play closed testing) and a React + TypeScript web version, sharing one canonical set of fielding positions and tactical presets so both platforms always agree on what a formation looks like. Drag fielders around an interactive pitch, validate placements against ICC fielding regulations for T20/ODI/Test, mirror the field for left-handed batters, and export a tactical plan. AI advice is bring-your-own-key, calling the Gemini API directly from the browser so no server ever sees a visitor's API key.",
     tags: ['Kotlin', 'Android', 'React', 'TypeScript', 'Cloudflare Pages', 'Gemini API'],
     url: 'https://github.com/kavikar/CricketFieldPlanner/tree/main/web',
     live: 'https://cricketfieldplanner.com',
+  },
+  {
+    icon: '🧪',
+    name: 'Multi-Brand Playwright Framework',
+    period: '2026',
+    description:
+      'A Playwright E2E framework extracted from a real four-brand e-commerce automation platform I built and ran in production — the architecture and decisions are the real ones; brands, hosts and test data are fictional. Brand facts live in a typed, versioned registry rather than being forked or branched into specs. Stale feature-flag state and invalid execution settings throw instead of silently defaulting, and a brand with no live host skips rather than fails. Ships with a dependency-free demo storefront so CI has zero external network dependency.',
+    tags: [
+      'Playwright',
+      'TypeScript',
+      'Multi-Brand Testing',
+      'CI/CD',
+      'Test Architecture',
+    ],
+    url: 'https://github.com/kavikar/play-left',
   },
   {
     icon: '☕',
