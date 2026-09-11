@@ -159,7 +159,7 @@ export const projects: Project[] = [
     name: 'Agent-Based Playwright Framework',
     period: '2026',
     description:
-      'A Playwright automation framework built around agents and skills rather than a fixed script library. Agents draw on a knowledge base of project context that is refreshed on an ongoing basis, and integrate with Jira and Xray so cases, runs and results stay in sync without manual bookkeeping. Individual skills handle specific jobs — a locator doctor that diagnoses and repairs failing selectors, a regression planner that scopes which suites a change actually warrants — with more added as patterns repeat.',
+      'A Playwright framework built around agents and skills instead of a fixed script library, syncing cases, runs and results with Jira/Xray automatically.',
     tags: ['Playwright', 'AI Agents', 'Jira/Xray', 'Knowledge Base', 'Test Automation'],
   },
   {
@@ -167,7 +167,7 @@ export const projects: Project[] = [
     name: 'Test Infrastructure Platform',
     period: 'Jan 2026 – Present',
     description:
-      "Designed and built a test infrastructure platform end to end: CI/CD pipeline orchestration, BrowserStack mobile execution and automated Jira/Xray workflow synchronization in one place, replacing three disconnected manual steps. Adopted across multiple Inspire Brands projects (Sonic, Buffalo Wild Wings, Dunkin'). A genericized, from-scratch public release of the same architecture — brands, hosts and credentials replaced by fictional equivalents — is linked below.",
+      'CI/CD pipeline orchestration, BrowserStack mobile execution and Jira/Xray sync in one platform; a genericized public release of the same architecture is linked below.',
     tags: [
       'Java',
       'GitLab CI/CD',
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     name: 'Maestro E2E Framework',
     period: '2026',
     description:
-      'Built a production Maestro end-to-end framework with smoke suites, shared flows and critical-path coverage across digital ordering and POS systems. Introduced standardized runners reused across the wider testing scope, and integrated BrowserStack mobile pipelines with automated result reporting.',
+      'A Maestro end-to-end framework with smoke suites, shared flows and critical-path coverage across digital ordering and POS systems.',
     tags: ['Maestro', 'Playwright', 'BrowserStack', 'GitLab CI/CD', 'Java'],
   },
   {
@@ -191,7 +191,7 @@ export const projects: Project[] = [
     name: 'Personal Tracker',
     period: '2026',
     description:
-      "A calendar-centric tracker for running concurrent goals on one date grid — job applications, interview prep, admin tasks and habits. Local-first with IndexedDB, no account, works offline. Built the way I'd want a service at work built: typed, unit and Playwright E2E tested, linted in CI, containerized and documented.",
+      'A calendar-centric tracker for running concurrent goals — job applications, interview prep, admin tasks and habits — local-first with IndexedDB, no account needed.',
     tags: ['TypeScript', 'Vite', 'Playwright', 'Vitest', 'Docker', 'GitHub Actions'],
     url: 'https://github.com/kavikar/personal-tracker',
     live: 'https://personal-tracker-weld.vercel.app',
@@ -201,7 +201,7 @@ export const projects: Project[] = [
     name: 'Cricket Field Planner',
     period: '2026',
     description:
-      "Cricket field planning app in two forms: a Kotlin Android app (published to Google Play closed testing) and a React + TypeScript web version, sharing one canonical set of fielding positions and tactical presets so both platforms always agree on what a formation looks like. Drag fielders around an interactive pitch, validate placements against ICC fielding regulations for T20/ODI/Test, mirror the field for left-handed batters, and export a tactical plan. AI advice is bring-your-own-key, calling the Gemini API directly from the browser so no server ever sees a visitor's API key.",
+      'A cricket field-setting tool (Android + web) that validates fielder placements against ICC regulations and exports a tactical plan.',
     tags: ['Kotlin', 'Android', 'React', 'TypeScript', 'Cloudflare Pages', 'Gemini API'],
     url: 'https://github.com/kavikar/CricketFieldPlanner/tree/main/web',
     live: 'https://cricketfieldplanner.com',
@@ -211,7 +211,7 @@ export const projects: Project[] = [
     name: 'Multi-Brand Playwright Framework',
     period: '2026',
     description:
-      'A Playwright E2E framework extracted from a real four-brand e-commerce automation platform I built and ran in production — the architecture and decisions are the real ones; brands, hosts and test data are fictional. Brand facts live in a typed, versioned registry rather than being forked or branched into specs. Stale feature-flag state and invalid execution settings throw instead of silently defaulting, and a brand with no live host skips rather than fails. Ships with a dependency-free demo storefront so CI has zero external network dependency.',
+      'A multi-brand Playwright E2E framework with brand facts in a typed registry instead of forked specs, and a dependency-free demo storefront so CI needs no external network.',
     tags: [
       'Playwright',
       'TypeScript',
@@ -226,7 +226,7 @@ export const projects: Project[] = [
     name: 'Test Automation Framework',
     period: '2022',
     description:
-      'A Java test automation framework built on Selenium, Cucumber and Gradle, with BDD feature files and a page-object structure — an early project that shaped how I approach framework design today.',
+      'A Java test automation framework built on Selenium, Cucumber and Gradle, with BDD feature files and a page-object structure.',
     tags: ['Java', 'Selenium', 'Cucumber', 'Gradle', 'BDD'],
     url: 'https://github.com/kavikar/Test_Automation_Framework',
   },
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     name: 'Emotion Recognition from Speech',
     period: 'Jan 2019 – Apr 2019',
     description:
-      'Built a machine learning system to classify emotions from speech audio using Support Vector Machine (SVM) in Python. Processed audio features and trained the model on labeled datasets for reliable emotion detection.',
+      'A machine learning system that classifies emotions from speech audio using an SVM in Python.',
     tags: ['Python', 'SVM', 'Machine Learning', 'Audio Processing', 'scikit-learn'],
   },
 ];
