@@ -1,4 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vite';
+
+const pkg = JSON.parse(
+  readFileSync(fileURLToPath(new URL('./package.json', import.meta.url)), 'utf-8'),
+) as { version: string };
 
 /**
  * Absolute site URL, needed for canonical/OG/JSON-LD tags, robots.txt and the
@@ -75,5 +81,6 @@ function siteUrlPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [siteUrlPlugin()],
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   build: { target: 'es2020' },
 });

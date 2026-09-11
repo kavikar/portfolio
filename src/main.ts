@@ -302,6 +302,12 @@ function setYear(): void {
   if (el) el.textContent = String(new Date().getFullYear());
 }
 
+// ===== Footer version =====
+function setVersion(): void {
+  const el = document.getElementById('app-version');
+  if (el) el.textContent = `· v${__APP_VERSION__}`;
+}
+
 // ===== Boot =====
 document.addEventListener('DOMContentLoaded', () => {
   renderTimeline();
@@ -315,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEmail();
   initAnalytics();
   setYear();
+  setVersion();
 
   // Scroll reveal runs after DOM is populated
   requestAnimationFrame(() => initScrollReveal());
