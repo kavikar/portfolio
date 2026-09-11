@@ -168,7 +168,7 @@ export const projects: Project[] = [
     name: 'Test Infrastructure Platform',
     period: 'Jan 2026 – Present',
     description:
-      "Designed and built a test infrastructure platform end to end: CI/CD pipeline orchestration, BrowserStack mobile execution and automated Jira/Xray workflow synchronization in one place, replacing three disconnected manual steps. Adopted across multiple Inspire Brands projects (Sonic, Buffalo Wild Wings, Dunkin').",
+      "Designed and built a test infrastructure platform end to end: CI/CD pipeline orchestration, BrowserStack mobile execution and automated Jira/Xray workflow synchronization in one place, replacing three disconnected manual steps. Adopted across multiple Inspire Brands projects (Sonic, Buffalo Wild Wings, Dunkin'). A genericized, from-scratch public release of the same architecture — brands, hosts and credentials replaced by fictional equivalents — is linked below.",
     tags: [
       'Java',
       'GitLab CI/CD',
@@ -177,6 +177,7 @@ export const projects: Project[] = [
       'REST API',
       'Infrastructure',
     ],
+    url: 'https://github.com/kavikar/shuriken',
   },
   {
     icon: '📱',
