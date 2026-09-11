@@ -36,14 +36,13 @@ export const experiences: Experience[] = [
     company: 'Inspire Brands (via Capgemini) — Atlanta, GA',
     period: 'Jan 2024 – Present',
     description:
-      'Architected and own the test automation platform for the account as its primary contributor, driving architecture across test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling — prompt-driven automation runners and automated test-case generation — cutting manual authoring effort, and Snowflake dashboards giving stakeholders data-driven visibility into release readiness. Built the Maestro end-to-end framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for ~1 year, and currently work on loyalty-platform resiliency and payment error handling.',
+      'Own the test automation platform for the account, covering test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling — prompt-driven automation runners and automated test-case generation — to cut manual authoring effort, and the Maestro end-to-end framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for about a year, and currently work on loyalty-platform resiliency and payment error handling.',
     tags: [
       'Java',
       'Maestro',
       'BrowserStack',
       'GitLab CI/CD',
       'Jira/Xray',
-      'Snowflake',
       'AI-Assisted QA',
     ],
   },
@@ -81,7 +80,7 @@ export const experiences: Experience[] = [
   },
   {
     role: 'QA Automation Engineer — Retail & Care',
-    company: 'T-Mobile — Bengaluru, India',
+    company: 'T-Mobile (via Capgemini) — Bengaluru, India',
     period: 'Jan 2020 – Jun 2020',
     description:
       'Tested desktop, web, mobile, and API applications for retail and care operations using Tosca and Appium (Java). Validated APIs with Postman and tracked defects in Jira in close collaboration with development teams.',
@@ -122,12 +121,12 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '🗄️',
     name: 'Data & APIs',
-    skills: ['REST APIs', 'Postman', 'SQL', 'MongoDB', 'Snowflake', 'API Automation'],
+    skills: ['REST APIs', 'Postman', 'SQL', 'MongoDB', 'API Automation'],
   },
   {
     icon: '☁️',
     name: 'Cloud & Tools',
-    skills: ['AWS', 'Docker', 'BrowserStack', 'Snowflake', 'Git', 'Postman'],
+    skills: ['AWS', 'Docker', 'BrowserStack', 'Git', 'Postman'],
   },
 ];
 
