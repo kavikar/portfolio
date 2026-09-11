@@ -36,7 +36,7 @@ export const experiences: Experience[] = [
     company: 'Inspire Brands (via Capgemini) — Atlanta, GA',
     period: 'Jan 2024 – Present',
     description:
-      'Own the test automation platform for the account, covering test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling — prompt-driven automation runners and automated test-case generation — to cut manual authoring effort, and the Maestro end-to-end framework for Sonic with smoke suites, shared flows and critical-path coverage. Led a cross-functional QA team of 8 for about a year, and currently work on loyalty-platform resiliency and payment error handling.',
+      'Own the test automation platform for the account, covering test orchestration, CI/CD and Jira/Xray integration. Built AI-assisted QA tooling — prompt-driven automation runners and automated test-case generation — to cut manual authoring effort, and the Maestro end-to-end framework for Sonic with smoke suites, shared flows and critical-path coverage. Also led the QA team for a period, and now focus on loyalty-platform resiliency and payment error handling.',
     tags: [
       'Java',
       'Maestro',
