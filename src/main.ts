@@ -4,8 +4,8 @@ import { experiences, skillCategories, certifications, projects } from './data.j
 
 // ===== Typed text animation =====
 const typedPhrases = [
-  'Software Quality Engineer',
-  'SDET',
+  'QA Lead',
+  'QA Automation Engineer',
   'Test Infrastructure Builder',
   'Platform & DevProd Engineer',
 ];
