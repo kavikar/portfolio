@@ -547,6 +547,18 @@ body {
   color: var(--text-muted);
   font-size: 0.95rem;
 }
+.timeline-bullets {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  padding-left: 1.1em;
+}
+.timeline-bullets li {
+  margin-bottom: 0.4em;
+}
+.timeline-bullets li:last-child {
+  margin-bottom: 0;
+}
 .timeline-tags {
   display: flex;
   flex-wrap: wrap;
@@ -632,6 +644,20 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
   max-width: 900px;
+}
+.certs-grid--compact {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: none;
+}
+.certs-grid--compact .cert-card {
+  padding: 1rem;
+  gap: 0.75rem;
+}
+.certs-grid--compact .cert-icon {
+  font-size: 1.5rem;
+}
+.certs-grid--compact .cert-name {
+  font-size: 0.85rem;
 }
 .cert-card {
   background: var(--bg-card);
