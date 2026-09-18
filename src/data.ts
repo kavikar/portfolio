@@ -167,7 +167,7 @@ export const skillCategories: SkillCategory[] = [
       'POS & Payments Integration Testing',
       'Accessibility Testing',
       'A/B & Feature-Flag Validation',
-      'Jira / Xray / qTest / ReportPortal',
+      'Jira / Xray / qTest / Confluence / ReportPortal',
     ],
   },
 ];
