@@ -4,10 +4,9 @@ import { experiences, skillCategories, certifications, projects } from './data.j
 
 // ===== Typed text animation =====
 const typedPhrases = [
-  'QA Lead',
-  'QA Automation Engineer',
-  'Test Infrastructure Builder',
-  'Platform & DevProd Engineer',
+  'Test Infrastructure',
+  'CI/CD & Developer Tooling',
+  'AI-Assisted Engineering',
 ];
 
 /**
@@ -178,7 +177,9 @@ function renderTimeline(): void {
           <span class="timeline-period">${exp.period}</span>
         </div>
         <div class="timeline-company">${exp.company}</div>
-        <p class="timeline-desc">${exp.description}</p>
+        <ul class="timeline-bullets">
+          ${exp.bullets.map((b) => `<li>${b}</li>`).join('')}
+        </ul>
         <div class="timeline-tags">
           ${exp.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
         </div>
