@@ -236,7 +236,7 @@ function renderProjects(): void {
   if (!container) return;
 
   container.innerHTML = projects
-    .map((p) => {
+    .map((p, i) => {
       // The card stays a <div>: an anchor-wrapped card cannot also contain the
       // "Live demo" anchor, because nested <a> elements are invalid HTML and the
       // parser silently splits the card into two siblings.
@@ -250,8 +250,12 @@ function renderProjects(): void {
           `Live demo<span aria-hidden="true">\u2197</span></a>`
         : '';
 
+      // Glass is the surface for every project card; the first one also gets
+      // a wider pane so the grid doesn't repeat as identical equal tiles.
+      const cardClass = i === 0 ? 'project-card glass featured' : 'project-card glass';
+
       return `
-    <div class="project-card">
+    <div class="${cardClass}">
       <div class="project-icon">${p.icon}</div>
       <div>
         <div class="project-name">${title}</div>
@@ -266,6 +270,51 @@ function renderProjects(): void {
   `;
     })
     .join('');
+}
+
+// ===== Pointer-reactive specular highlight on the hero glass panel =====
+/**
+ * The hero panel is the one signature interactive glass element. Its
+ * specular highlight (the ::after in .glass--lens) follows the pointer via
+ * the --mx/--my custom properties set here, rAF-throttled so it never fires
+ * more than once per frame. Skipped entirely — leaving the panel at its
+ * static default position — when the OS asks for reduced motion, or on a
+ * touch/coarse pointer where "follows the cursor" has no meaning.
+ */
+function initGlassPointer(): void {
+  const panel = document.getElementById('hero-lens');
+  if (!panel) return;
+  if (prefersReducedMotion()) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let pending = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  const apply = (): void => {
+    pending = false;
+    panel.style.setProperty('--mx', `${lastX}%`);
+    panel.style.setProperty('--my', `${lastY}%`);
+  };
+
+  panel.addEventListener('pointermove', (e) => {
+    const rect = panel.getBoundingClientRect();
+    lastX = ((e.clientX - rect.left) / rect.width) * 100;
+    lastY = ((e.clientY - rect.top) / rect.height) * 100;
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(apply);
+    }
+  });
+
+  panel.addEventListener('pointerleave', () => {
+    lastX = 30;
+    lastY = 20;
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(apply);
+    }
+  });
 }
 
 // ===== Email (assembled at runtime to keep it out of the HTML source) =====
@@ -319,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTyped();
   initNavbar();
   initCounters();
+  initGlassPointer();
   initEmail();
   initAnalytics();
   setYear();

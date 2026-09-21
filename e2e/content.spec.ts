@@ -165,7 +165,10 @@ test.describe('page health', () => {
     const loaded = await page.evaluate(() =>
       [...document.fonts].map((f) => `${f.family}|${f.status}`),
     );
-    expect(loaded).toEqual(expect.arrayContaining([expect.stringContaining('Inter')]));
+    expect(loaded).toEqual(expect.arrayContaining([expect.stringContaining('Fraunces')]));
+    expect(loaded).toEqual(
+      expect.arrayContaining([expect.stringContaining('Space Grotesk')]),
+    );
     expect(loaded).toEqual(
       expect.arrayContaining([expect.stringContaining('JetBrains Mono')]),
     );
