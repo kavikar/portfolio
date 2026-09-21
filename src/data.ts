@@ -185,7 +185,7 @@ export const certifications: Certification[] = [
   },
   {
     icon: '🎯',
-    name: 'Tosca L1, TQL, qTest & RPA Specialist',
+    name: 'Tosca L1 & qTest',
     issuer: 'Tricentis',
   },
   {
