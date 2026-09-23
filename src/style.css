@@ -428,7 +428,6 @@ body::after {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 2.5rem;
 }
 .hero-greeting {
   font-family: var(--font-mono);
@@ -478,27 +477,45 @@ body::after {
   animation: fadeUp 0.6s ease forwards 0.8s;
 }
 
-/* The hero panel: the one signature glass element. Its actions are a 2x2
-   grid of equal-width buttons, so both columns share left and right edges
-   and no row is left half-empty. It doesn't reorder anything in the
-   document — only position on screen shifts, at the same breakpoint the
-   whole hero goes two-column. The cap only matters on wide desktops, where
-   the grid column would otherwise stretch the buttons far past their text. */
+/* The hero dock: the one signature glass element — a single slim pill holding
+   the primary action and round icon buttons for the rest, sized to its
+   contents rather than to a grid column, so there is no empty glass to
+   either side or below. It follows the summary in both the document and on
+   screen, at every width. */
 .hero-panel {
-  max-width: 400px;
-  padding: 1.5rem;
+  justify-self: start;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 2rem;
+  padding: 0.4rem;
+  border-radius: var(--radius-pill);
   opacity: 0;
   animation: fadeUp 0.6s ease forwards 1s;
 }
 .hero-actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 .hero-actions .btn {
-  justify-content: center;
-  padding-inline: 1rem;
+  padding: 0.75rem 1.4rem;
   white-space: nowrap;
+}
+.hero-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  transition: all var(--transition);
+}
+.hero-icon svg {
+  width: 19px;
+  height: 19px;
 }
 .btn {
   position: relative;
@@ -531,23 +548,34 @@ body::after {
   color: #fff;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
 }
-.btn-primary:hover {
-  background: #98102f;
-  transform: translateY(-2px);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.3) inset,
-    0 8px 24px rgba(244, 63, 94, 0.35);
-}
+
 .btn-outline {
   border: 1px solid var(--border);
   color: var(--text);
   background: transparent;
 }
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(244, 63, 94, 0.06);
-  transform: translateY(-2px);
+/* Hover styles only for devices that really hover. On a touchscreen the
+   browser keeps :hover applied after a tap, which left a button lifted and
+   recoloured until the next tap elsewhere. */
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: #98102f;
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.3) inset,
+      0 8px 24px rgba(244, 63, 94, 0.35);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(244, 63, 94, 0.06);
+    transform: translateY(-2px);
+  }
+  .hero-icon:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
 }
 .hero-scroll-hint {
   position: absolute;
@@ -579,25 +607,6 @@ body::after {
   }
   50% {
     opacity: 1;
-  }
-}
-
-@media (min-width: 900px) {
-  .hero-content {
-    grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr);
-    column-gap: 4rem;
-    row-gap: 0;
-  }
-  .hero-greeting,
-  .hero-name,
-  .hero-title,
-  .hero-summary {
-    grid-column: 1;
-  }
-  .hero-panel {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    align-self: center;
   }
 }
 
@@ -947,12 +956,14 @@ body::after {
   opacity: 1;
   transform: translateY(0);
 }
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 30px 70px -26px rgba(244, 63, 94, 0.3);
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+      0 30px 70px -26px rgba(244, 63, 94, 0.3);
+  }
 }
 @media (min-width: 720px) {
   .project-card.featured {
@@ -1091,25 +1102,20 @@ footer {
   .hero-scroll-hint {
     display: none;
   }
-  .hero-panel {
-    padding: 1.25rem;
-  }
 }
 
-/* The narrowest phones leave each column ~100px — less than "Résumé (PDF)"
-   needs at full size, which clipped the label at 320 and 360px wide. Trim
-   the panel padding and label size rather than let one button wrap onto two
-   lines and break the grid's even row height. */
+/* The narrowest phones (≤380px) can't fit the full dock on one line: smaller
+   icon buttons and a tighter primary button, and the decorative arrow goes. */
 @media (max-width: 380px) {
-  .hero-panel {
-    padding: 0.875rem;
-  }
-  .hero-actions {
-    gap: 0.6rem;
-  }
   .hero-actions .btn {
-    padding-inline: 0.5rem;
-    font-size: 0.85rem;
+    padding-inline: 1rem;
+  }
+  .hero-actions .btn .btn-arrow {
+    display: none;
+  }
+  .hero-icon {
+    width: 40px;
+    height: 40px;
   }
 }
 
