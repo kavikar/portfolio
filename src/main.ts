@@ -180,9 +180,11 @@ function renderTimeline(): void {
         <ul class="timeline-bullets">
           ${exp.bullets.map((b) => `<li>${b}</li>`).join('')}
         </ul>
-        <div class="timeline-tags">
-          ${exp.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
-        </div>
+        ${
+          exp.tags.length
+            ? `<div class="timeline-tags">${exp.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>`
+            : ''
+        }
       </div>
     </div>
   `,
