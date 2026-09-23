@@ -263,8 +263,6 @@ export const projects: Project[] = [
     description:
       'A calendar-centric tracker for running concurrent goals — job applications, interview prep, admin tasks and habits — local-first with IndexedDB, no account needed.',
     tags: ['TypeScript', 'Vite', 'Playwright', 'Vitest', 'Docker', 'GitHub Actions'],
-    url: 'https://github.com/kavikar/personal-tracker',
-    live: 'https://personal-tracker-weld.vercel.app',
   },
   {
     icon: '🏏',
