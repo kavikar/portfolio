@@ -1104,21 +1104,6 @@ footer {
   }
 }
 
-/* The narrowest phones (≤380px) can't fit the full dock on one line: smaller
-   icon buttons and a tighter primary button, and the decorative arrow goes. */
-@media (max-width: 380px) {
-  .hero-actions .btn {
-    padding-inline: 1rem;
-  }
-  .hero-actions .btn .btn-arrow {
-    display: none;
-  }
-  .hero-icon {
-    width: 40px;
-    height: 40px;
-  }
-}
-
 @media (max-width: 480px) {
   .projects-grid,
   .skills-grid {
