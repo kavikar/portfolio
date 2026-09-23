@@ -72,15 +72,14 @@
   --text-muted: #a89a9e;
   --border: rgba(255, 255, 255, 0.07);
   --nav-h: 64px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Radius scale — deliberately uneven rather than one value everywhere:
-     sharp on instrumentation (buttons, badges, test points), a touch softer
-     on card-like surfaces, generous only on the one large glass pane. */
-  --radius-xs: 2px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 26px;
+  /* Radius scale — still varied by element size rather than one flat value
+     everywhere, but rounded throughout for a softer, glossier surface. */
+  --radius-xs: 10px;
+  --radius-sm: 16px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
   --radius-pill: 999px;
 
   /* Background field — a faint schematic grid behind everything, in the
@@ -96,8 +95,8 @@
   --glass-bg-solid: #171114;
   --glass-border-a: rgba(255, 255, 255, 0.14);
   --glass-border-b: rgba(244, 63, 94, 0.28);
-  --glass-blur: 16px;
-  --glass-saturate: 150%;
+  --glass-blur: 22px;
+  --glass-saturate: 175%;
 
   --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', serif;
   --font-body: 'Space Grotesk Variable', system-ui, sans-serif;
@@ -176,13 +175,19 @@ body::after {
    =================================================================== */
 .glass {
   position: relative;
-  background: var(--glass-bg);
+  /* A soft sheen across the top third, layered over the tint — the
+     highlight a curved glass surface catches from above. */
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.09), transparent 45%), var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 24px 60px -28px rgba(0, 0, 0, 0.7);
+    0 30px 70px -30px rgba(0, 0, 0, 0.75);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 /* The specular edge: a 1px gradient border via mask-composite, so it follows
@@ -341,7 +346,7 @@ body::after {
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 0.4rem 1rem;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-pill);
   transition:
     background var(--transition),
     color var(--transition);
@@ -386,14 +391,9 @@ body::after {
   padding: 0 2rem;
 }
 
-/* Section titles carry a mono index (auto-numbered by CSS counter — About is
-   01, Contact is 06, hero isn't counted) and a hairline that runs the rest
-   of the row, instead of a short accent bar under centred text. */
-main {
-  counter-reset: section;
-}
+/* A soft glowing rule runs the rest of the row after each title, instead of
+   a short accent bar under centred text. */
 .section-title {
-  counter-increment: section;
   display: flex;
   align-items: baseline;
   gap: 1.1rem;
@@ -402,26 +402,15 @@ main {
   font-weight: 600;
   margin-bottom: 3.5rem;
 }
-.section-title::before {
-  content: counter(section, decimal-leading-zero);
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xs);
-  padding: 0.2rem 0.45rem;
-  transform: translateY(-0.15em);
-}
 .section-title::after {
   content: '';
   flex: 1 1 auto;
   align-self: center;
-  height: 1px;
+  height: 2px;
   margin-left: 0.5rem;
-  background: linear-gradient(90deg, var(--border), transparent 85%);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--accent-dim), transparent 85%);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
 }
 
 /* ===== Hero ===== */
@@ -505,10 +494,11 @@ main {
   margin-bottom: 1.75rem;
 }
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   padding: 0.7rem 1.6rem;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-pill);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.92rem;
@@ -516,18 +506,30 @@ main {
   transition: all var(--transition);
   cursor: pointer;
   border: none;
-  /* A clipped corner rather than a rounded one — a small, deliberate
-     departure from the uniform radius used elsewhere. */
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  overflow: hidden;
+}
+/* A glossy sheen across the top third of every button — the same highlight
+   a liquid-glass surface catches, just on a solid fill instead of behind a
+   blur. */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 55%);
+  pointer-events: none;
 }
 .btn-primary {
   background: var(--accent-strong);
   color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
 }
 .btn-primary:hover {
   background: #98102f;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.3) inset,
+    0 8px 24px rgba(244, 63, 94, 0.35);
 }
 .btn-outline {
   border: 1px solid var(--border);
@@ -537,6 +539,7 @@ main {
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(244, 63, 94, 0.06);
   transform: translateY(-2px);
 }
 .hero-socials {
@@ -550,7 +553,7 @@ main {
   width: 40px;
   height: 40px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-pill);
   color: var(--text-muted);
   transition: all var(--transition);
 }
@@ -717,23 +720,22 @@ main {
   opacity: 1;
   transform: translateX(0);
 }
-/* A diamond "test point" rather than a dot — same 10x10 bounding box as
-   before, so the centring math against the 2px rule is unchanged; only the
-   shape (rotated square, sharp radius) reads differently. Centred on the
-   rule: the item's box starts at the 2rem padding, so the marker must sit
-   back by that plus half its own width to land on the line. At -2.5rem its
-   centre was three pixels adrift, which read as a wobble. */
+/* A soft glowing dot on the trace line. Centred on the rule: the item's box
+   starts at the 2rem padding, so the marker must sit back by that plus half
+   its own width to land on the line. At -2.5rem its centre was three pixels
+   adrift, which read as a wobble. */
 .timeline-dot {
   position: absolute;
   left: calc(-2rem - 4px);
   top: 7px;
   width: 10px;
   height: 10px;
-  border-radius: var(--radius-xs);
-  transform: rotate(45deg);
+  border-radius: 50%;
   background: var(--accent);
   border: 2px solid var(--bg);
-  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
+  box-shadow:
+    0 0 0 3px rgba(244, 63, 94, 0.12),
+    0 0 10px rgba(244, 63, 94, 0.4);
 }
 .timeline-card {
   background: var(--bg-card);
@@ -951,25 +953,23 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition:
-    border-color var(--transition),
-    transform var(--transition);
   opacity: 0;
   transform: translateY(20px);
   transition:
     opacity 0.5s ease,
-    transform 0.5s ease,
-    box-shadow 0.3s ease;
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 .project-card.visible {
   opacity: 1;
   transform: translateY(0);
 }
 .project-card:hover {
+  transform: translateY(-6px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-    0 24px 60px -22px rgba(244, 63, 94, 0.25);
+    0 30px 70px -26px rgba(244, 63, 94, 0.3);
 }
 @media (min-width: 720px) {
   .project-card.featured {
