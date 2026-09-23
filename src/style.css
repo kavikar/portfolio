@@ -478,30 +478,27 @@ body::after {
   animation: fadeUp 0.6s ease forwards 0.8s;
 }
 
-/* The hero panel: the one signature glass element, holding the existing
-   actions and socials. It doesn't reorder them in the document — only their
-   position on screen shifts, at the same breakpoint the whole hero goes
-   two-column. */
-/* Capped rather than left to stretch the full width of its grid column: at
-   any width narrower than the two-column breakpoint, .hero-content has only
-   one track, so an unconstrained panel spans edge to edge (its own block
-   width defaults to 100% of that track — confirmed at 348px on a 412px-wide
-   phone) while its buttons wrap into two short rows, leaving a wide dead
-   strip of glass to their right and below. 300px is sized to the two
-   widest buttons side by side plus padding, and is deliberately smaller
-   than that 348px track so the cap actually engages, rather than sitting
-   above a width nothing was reaching. */
+/* The hero panel: the one signature glass element. Its actions are a 2x2
+   grid of equal-width buttons, so both columns share left and right edges
+   and no row is left half-empty. It doesn't reorder anything in the
+   document — only position on screen shifts, at the same breakpoint the
+   whole hero goes two-column. The cap only matters on wide desktops, where
+   the grid column would otherwise stretch the buttons far past their text. */
 .hero-panel {
-  max-width: 300px;
-  padding: 1.75rem;
+  max-width: 400px;
+  padding: 1.5rem;
   opacity: 0;
   animation: fadeUp 0.6s ease forwards 1s;
 }
 .hero-actions {
-  display: flex;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.hero-actions .btn {
+  justify-content: center;
+  padding-inline: 1rem;
+  white-space: nowrap;
 }
 .btn {
   position: relative;
@@ -550,30 +547,6 @@ body::after {
   border-color: var(--accent);
   color: var(--accent);
   background: rgba(244, 63, 94, 0.06);
-  transform: translateY(-2px);
-}
-.hero-socials {
-  display: flex;
-  gap: 0.75rem;
-}
-.hero-socials a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  color: var(--text-muted);
-  transition: all var(--transition);
-}
-.hero-socials a svg {
-  width: 18px;
-  height: 18px;
-}
-.hero-socials a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
   transform: translateY(-2px);
 }
 .hero-scroll-hint {
@@ -1119,7 +1092,24 @@ footer {
     display: none;
   }
   .hero-panel {
-    padding: 1.25rem 0 0;
+    padding: 1.25rem;
+  }
+}
+
+/* The narrowest phones leave each column ~100px — less than "Résumé (PDF)"
+   needs at full size, which clipped the label at 320 and 360px wide. Trim
+   the panel padding and label size rather than let one button wrap onto two
+   lines and break the grid's even row height. */
+@media (max-width: 380px) {
+  .hero-panel {
+    padding: 0.875rem;
+  }
+  .hero-actions {
+    gap: 0.6rem;
+  }
+  .hero-actions .btn {
+    padding-inline: 0.5rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1384,7 +1374,6 @@ html:not(.js-reveal) .project-card {
   .hero-title,
   .hero-summary,
   .hero-actions,
-  .hero-socials,
   .hero-panel {
     animation: none !important;
     opacity: 1 !important;

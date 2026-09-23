@@ -38,7 +38,7 @@ export const experiences: Experience[] = [
     bullets: [
       'Own automation standards and framework direction across four Inspire Brands properties (Sonic, Buffalo Wild Wings, Dunkin’, Arby’s), leading CI/CD test execution end to end.',
       'Rebuilt Sonic’s regression suite on AI agent skills and prompt-driven test generation, with human review gates before any suite is trusted.',
-      'Designed resiliency and circuit-breaker testing for Dunkin’’s loyalty platform under induced failure conditions.',
+      'Designed resiliency and circuit-breaker testing for Dunkin’s loyalty platform under induced failure conditions.',
       'Led contract, regression, and integration validation for Buffalo Wild Wings’ Business Service Layer migration.',
     ],
     tags: ['AI Agent Skills', 'Prompt-Driven Testing', 'CI/CD', 'Resiliency Testing'],
@@ -108,13 +108,22 @@ export const experiences: Experience[] = [
     ],
     tags: ['Tosca', 'Appium', 'Java', 'Postman', 'Jira'],
   },
+  {
+    role: 'Graduate Trainee',
+    company: 'Capgemini',
+    period: 'Aug 2019 – Dec 2019',
+    bullets: [
+      'Capgemini graduate training programme ahead of the first client engagement.',
+    ],
+    tags: [],
+  },
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
     icon: '💻',
     name: 'Languages',
-    skills: ['Java', 'Python', 'TypeScript / JavaScript', 'SQL'],
+    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL'],
   },
   {
     icon: '🏗️',
@@ -157,7 +166,25 @@ export const skillCategories: SkillCategory[] = [
   {
     icon: '🗄️',
     name: 'Data & APIs',
-    skills: ['SQL', 'MongoDB', 'REST APIs', 'Postman', 'Swagger', 'Azure Service Bus'],
+    skills: [
+      'SQL',
+      'MongoDB',
+      'REST APIs',
+      'Postman',
+      'Swagger',
+      'Azure Service Bus & Azure-hosted DBs (integration validation)',
+    ],
+  },
+  {
+    icon: '📈',
+    name: 'Observability',
+    skills: [
+      'New Relic',
+      'Splunk',
+      'Log-Based Root-Cause Analysis',
+      'Custom Metrics & Dashboards',
+      'Circuit-Breaker & Error-Scenario Testing',
+    ],
   },
   {
     icon: '📋',
@@ -167,6 +194,8 @@ export const skillCategories: SkillCategory[] = [
       'POS & Payments Integration Testing',
       'Accessibility Testing',
       'A/B & Feature-Flag Validation',
+      'Optimizely',
+      'Contentful',
       'Jira / Xray / qTest / Confluence / ReportPortal',
     ],
   },
