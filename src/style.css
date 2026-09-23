@@ -482,7 +482,17 @@ body::after {
    actions and socials. It doesn't reorder them in the document — only their
    position on screen shifts, at the same breakpoint the whole hero goes
    two-column. */
+/* Capped rather than left to stretch the full width of its grid column: at
+   any width narrower than the two-column breakpoint, .hero-content has only
+   one track, so an unconstrained panel spans edge to edge (its own block
+   width defaults to 100% of that track — confirmed at 348px on a 412px-wide
+   phone) while its buttons wrap into two short rows, leaving a wide dead
+   strip of glass to their right and below. 300px is sized to the two
+   widest buttons side by side plus padding, and is deliberately smaller
+   than that 348px track so the cap actually engages, rather than sitting
+   above a width nothing was reaching. */
 .hero-panel {
+  max-width: 300px;
   padding: 1.75rem;
   opacity: 0;
   animation: fadeUp 0.6s ease forwards 1s;
