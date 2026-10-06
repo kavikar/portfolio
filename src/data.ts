@@ -32,11 +32,11 @@ export interface Project {
 
 export const experiences: Experience[] = [
   {
-    role: 'SDET / Automation Technical Lead — Multi-Brand Digital Ordering & POS Platforms',
+    role: 'SDET & Test Platform Engineer — Multi-Brand Digital Ordering & POS Platforms',
     company: 'Capgemini (Client: Inspire Brands) — Atlanta, GA',
     period: 'Apr 2026 – Present',
     bullets: [
-      'Own automation standards and framework direction across four Inspire Brands properties (Sonic, Buffalo Wild Wings, Dunkin’, Arby’s), leading CI/CD test execution end to end.',
+      'Own automation standards and framework direction across four Inspire Brands properties (Sonic, Buffalo Wild Wings, Dunkin’, Arby’s), and drive CI/CD test execution end to end.',
       'Rebuilt Sonic’s regression suite on AI agent skills and prompt-driven test generation, with human review gates before any suite is trusted.',
       'Designed resiliency and circuit-breaker testing for Dunkin’s loyalty platform under induced failure conditions.',
       'Led contract, regression, and integration validation for Buffalo Wild Wings’ Business Service Layer migration.',
