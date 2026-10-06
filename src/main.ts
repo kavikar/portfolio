@@ -2,13 +2,6 @@ import { inject } from '@vercel/analytics';
 import './style.css';
 import { experiences, skillCategories, certifications, projects } from './data.js';
 
-// ===== Typed text animation =====
-const typedPhrases = [
-  'Test Infrastructure',
-  'CI/CD & Developer Tooling',
-  'AI-Assisted Engineering',
-];
-
 /**
  * Honours the OS-level "reduce motion" setting. Every animated behaviour below
  * degrades to its finished state rather than being removed, so no content is
@@ -16,44 +9,6 @@ const typedPhrases = [
  */
 const prefersReducedMotion = (): boolean =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function initTyped(): void {
-  const el = document.querySelector<HTMLSpanElement>('.typed-text');
-  if (!el) return;
-
-  if (prefersReducedMotion()) {
-    el.textContent = typedPhrases[0];
-    document.querySelector('.cursor')?.remove();
-    return;
-  }
-
-  let phraseIdx = 0;
-  let charIdx = 0;
-  let deleting = false;
-
-  const tick = (): void => {
-    const phrase = typedPhrases[phraseIdx];
-    el.textContent = deleting
-      ? phrase.substring(0, charIdx--)
-      : phrase.substring(0, charIdx++);
-
-    let delay = deleting ? 50 : 90;
-
-    if (!deleting && charIdx > phrase.length) {
-      delay = 2000;
-      deleting = true;
-    } else if (deleting && charIdx < 0) {
-      deleting = false;
-      charIdx = 0;
-      phraseIdx = (phraseIdx + 1) % typedPhrases.length;
-      delay = 400;
-    }
-
-    setTimeout(tick, delay);
-  };
-
-  tick();
-}
 
 // ===== Navbar scroll effect =====
 function initNavbar(): void {
@@ -354,12 +309,6 @@ function setYear(): void {
   if (el) el.textContent = String(new Date().getFullYear());
 }
 
-// ===== Footer version =====
-function setVersion(): void {
-  const el = document.getElementById('app-version');
-  if (el) el.textContent = `· v${__APP_VERSION__}`;
-}
-
 // ===== Boot =====
 document.addEventListener('DOMContentLoaded', () => {
   renderTimeline();
@@ -367,14 +316,12 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCertifications();
   renderProjects();
 
-  initTyped();
   initNavbar();
   initCounters();
   initGlassPointer();
   initEmail();
   initAnalytics();
   setYear();
-  setVersion();
 
   // Scroll reveal runs after DOM is populated
   requestAnimationFrame(() => initScrollReveal());

@@ -135,8 +135,7 @@ test.describe('reduced motion', () => {
     const target = await first.getAttribute('data-target');
     await expect(first).toHaveText(new RegExp(`^${target}\\+?$`));
 
-    // The typing animation is replaced by static text, and its cursor removed.
-    await expect(page.locator('.typed-text')).not.toBeEmpty();
-    await expect(page.locator('.cursor')).toHaveCount(0);
+    // The hero title is static text, so it is complete without any motion.
+    await expect(page.locator('.hero-title')).toHaveText(/Test Infrastructure/);
   });
 });
