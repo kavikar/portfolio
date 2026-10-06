@@ -32,11 +32,11 @@ export interface Project {
 
 export const experiences: Experience[] = [
   {
-    role: 'SDET / Automation Technical Lead — Multi-Brand Digital Ordering & POS Platforms',
+    role: 'SDET & Test Platform Engineer — Multi-Brand Digital Ordering & POS Platforms',
     company: 'Capgemini (Client: Inspire Brands) — Atlanta, GA',
     period: 'Apr 2026 – Present',
     bullets: [
-      'Own automation standards and framework direction across four Inspire Brands properties (Sonic, Buffalo Wild Wings, Dunkin’, Arby’s), leading CI/CD test execution end to end.',
+      'Own automation standards and framework direction across four Inspire Brands properties (Sonic, Buffalo Wild Wings, Dunkin’, Arby’s), and drive CI/CD test execution end to end.',
       'Rebuilt Sonic’s regression suite on AI agent skills and prompt-driven test generation, with human review gates before any suite is trusted.',
       'Designed resiliency and circuit-breaker testing for Dunkin’s loyalty platform under induced failure conditions.',
       'Led contract, regression, and integration validation for Buffalo Wild Wings’ Business Service Layer migration.',
@@ -121,34 +121,58 @@ export const experiences: Experience[] = [
 
 export const skillCategories: SkillCategory[] = [
   {
+    icon: '🧪',
+    name: 'Test Automation',
+    skills: [
+      'Playwright',
+      'Selenium WebDriver',
+      'Appium',
+      'Maestro (incl. AOS TE)',
+      'Rest Assured',
+      'TestNG',
+      'Cucumber BDD',
+      'Tosca',
+    ],
+  },
+  {
     icon: '💻',
     name: 'Languages',
     skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL'],
   },
   {
     icon: '🏗️',
-    name: 'CI/CD & Build Tooling',
+    name: 'CI/CD & Test Infrastructure',
     skills: [
       'GitLab CI/CD',
+      'BrowserStack',
+      'Docker',
       'Gradle',
       'Git',
-      'Docker',
-      'BrowserStack',
       'AWS (Cloud Practitioner)',
     ],
   },
   {
-    icon: '🧪',
-    name: 'Test Frameworks',
+    icon: '🗄️',
+    name: 'APIs, Data & Integration Validation',
     skills: [
-      'Selenium WebDriver',
-      'Appium',
-      'Playwright',
-      'Maestro (incl. AOS TE)',
-      'Rest Assured',
-      'TestNG',
-      'Cucumber BDD',
-      'Tosca',
+      'REST APIs',
+      'Postman',
+      'Swagger',
+      'MongoDB',
+      'Azure Service Bus',
+      'Azure-hosted DBs',
+    ],
+  },
+  {
+    icon: '📈',
+    name: 'Observability & Experimentation',
+    skills: [
+      'New Relic',
+      'Splunk',
+      'Root-Cause Analysis (Logs)',
+      'Custom Metrics & Dashboards',
+      'Optimizely',
+      'Contentful',
     ],
   },
   {
@@ -164,39 +188,18 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    icon: '🗄️',
-    name: 'Data & APIs',
-    skills: [
-      'SQL',
-      'MongoDB',
-      'REST APIs',
-      'Postman',
-      'Swagger',
-      'Azure Service Bus & Azure-hosted DBs (integration validation)',
-    ],
-  },
-  {
-    icon: '📈',
-    name: 'Observability',
-    skills: [
-      'New Relic',
-      'Splunk',
-      'Log-Based Root-Cause Analysis',
-      'Custom Metrics & Dashboards',
-      'Circuit-Breaker & Error-Scenario Testing',
-    ],
-  },
-  {
     icon: '📋',
-    name: 'Quality Practice',
+    name: 'Quality Practice & Test Management',
     skills: [
-      'Resiliency / Fault-Tolerance Testing',
-      'POS & Payments Integration Testing',
+      'Resiliency Testing',
+      'Circuit-Breaker Testing',
+      'POS & Payments Integration',
       'Accessibility Testing',
       'A/B & Feature-Flag Validation',
-      'Optimizely',
-      'Contentful',
-      'Jira / Xray / qTest / Confluence / ReportPortal',
+      'Jira',
+      'Xray',
+      'qTest',
+      'ReportPortal',
     ],
   },
 ];
@@ -217,11 +220,6 @@ export const certifications: Certification[] = [
     name: 'Tosca L1 & qTest',
     issuer: 'Tricentis',
   },
-  {
-    icon: '🎓',
-    name: 'Harvard ManageMentor',
-    issuer: 'Harvard Business School',
-  },
 ];
 
 export const projects: Project[] = [
@@ -230,7 +228,7 @@ export const projects: Project[] = [
     name: 'Unified QA Platform',
     period: 'Jan 2026 – Present',
     description:
-      'Independently designed and built the full architecture, as sole developer, in personal time — test orchestration, CI/CD tooling, Jira/Xray sync, MCP servers, agent skills and prompt-driven test-generation runners in one platform. Sanitized public rebuild below, with dummy data in place of the production codebase.',
+      'Independently designed and built the full architecture, as sole developer, in personal time — test orchestration, CI/CD tooling, Jira/Xray sync, MCP servers, agent skills and prompt-driven test-generation runners in one platform. The linked repo is a sanitized public rebuild, with dummy data in place of the production codebase.',
     tags: [
       'Java',
       'GitLab CI/CD',
@@ -255,14 +253,6 @@ export const projects: Project[] = [
       'Test Architecture',
     ],
     url: 'https://github.com/kavikar/play-left',
-  },
-  {
-    icon: '📅',
-    name: 'Personal Tracker',
-    period: '2026',
-    description:
-      'A calendar-centric tracker for running concurrent goals — job applications, interview prep, admin tasks and habits — local-first with IndexedDB, no account needed.',
-    tags: ['TypeScript', 'Vite', 'Playwright', 'Vitest', 'Docker', 'GitHub Actions'],
   },
   {
     icon: '🏏',

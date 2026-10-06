@@ -119,16 +119,10 @@ test.describe('print layout', () => {
     }
   });
 
-  test('a complete job title prints, never a half-typed one', async ({ page }) => {
-    // Asserting on the animated span's text passes by luck whenever the retry
-    // window happens to catch a finished phrase mid-cycle. Print swaps in a
-    // static span, so assert on which element is visible instead.
-    await expect(page.locator('.typed-text')).toBeHidden();
-    await expect(page.locator('.cursor')).toBeHidden();
-
-    const staticTitle = page.locator('.typed-static');
-    await expect(staticTitle).toBeVisible();
-    await expect(staticTitle).toHaveText(/\S/);
+  test('the complete job title prints', async ({ page }) => {
+    const title = page.locator('.hero-title');
+    await expect(title).toBeVisible();
+    await expect(title).toHaveText(/Test Infrastructure.*AI-Assisted Engineering/);
   });
 
   test('all content is revealed even without scrolling first', async ({ page }) => {

@@ -452,22 +452,8 @@ body::after {
   font-weight: 400;
   color: var(--text-muted);
   margin: 1rem 0 1.5rem;
-  min-height: 1.6rem;
   opacity: 0;
   animation: fadeUp 0.6s ease forwards 0.6s;
-}
-.cursor {
-  color: var(--accent);
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
 }
 .hero-summary {
   max-width: 540px;
@@ -477,15 +463,13 @@ body::after {
   animation: fadeUp 0.6s ease forwards 0.8s;
 }
 
-/* The hero dock: the one signature glass element — a single slim pill holding
-   the primary action and round icon buttons for the rest, sized to its
-   contents rather than to a grid column, so there is no empty glass to
-   either side or below. It follows the summary in both the document and on
-   screen, at every width. */
+/* The hero dock: the one signature glass element — a slim glass pill holding
+   three equal-width buttons, so the actions read as one evenly spaced set.
+   It follows the summary in both the document and on screen, at every width. */
 .hero-panel {
   justify-self: start;
-  width: max-content;
-  max-width: 100%;
+  width: 100%;
+  max-width: 430px;
   margin-top: 2rem;
   padding: 0.4rem;
   border-radius: var(--radius-pill);
@@ -493,29 +477,43 @@ body::after {
   animation: fadeUp 0.6s ease forwards 1s;
 }
 .hero-actions {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.4rem;
 }
 .hero-actions .btn {
-  padding: 0.75rem 1.4rem;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 46px;
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
   white-space: nowrap;
 }
-.hero-icon {
-  display: grid;
-  place-items: center;
+.hero-actions .btn svg {
   flex: none;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  transition: all var(--transition);
+  width: 16px;
+  height: 16px;
 }
-.hero-icon svg {
-  width: 19px;
-  height: 19px;
+/* Three equal columns leave about 90-107px per button on phones — enough for
+   "View Work" but not for an icon beside it, which clipped the labels on every
+   phone up to 412px wide. Labels only below 460px; on the narrowest phones
+   (≤380px) the dock's padding and type also tighten. */
+@media (max-width: 460px) {
+  .hero-actions .btn svg {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .hero-panel {
+    padding: 0.3rem;
+  }
+  .hero-actions {
+    gap: 0.3rem;
+  }
+  .hero-actions .btn {
+    padding: 0 0.25rem;
+    font-size: 0.82rem;
+  }
 }
 .btn {
   position: relative;
@@ -569,11 +567,6 @@ body::after {
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(244, 63, 94, 0.06);
-    transform: translateY(-2px);
-  }
-  .hero-icon:hover {
-    border-color: var(--accent);
-    color: var(--accent);
     transform: translateY(-2px);
   }
 }
@@ -811,10 +804,25 @@ body::after {
 }
 
 /* ===== Skills ===== */
+/* Explicit column counts rather than auto-fill: with seven groups and the
+   first one double-width, 1, 2 or 4 columns always fill every row, where
+   auto-fill's 3-column step left a lone card on the last row. Breakpoints
+   are where the longest badge ("Prompt-Driven Test Generation") still fits
+   on one line; 4 columns wait until the container reaches its 1136px max. */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.25rem;
+}
+@media (min-width: 680px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .skill-category {
   background: var(--bg-card);
@@ -836,10 +844,8 @@ body::after {
 .skill-category:hover {
   border-top-color: var(--accent);
 }
-/* The primary category is given more room, which — with the rest left on
-   the regular auto-fill track — keeps the grid from reading as one more
-   row of identical equal-width tiles. */
-@media (min-width: 900px) {
+/* The first group (Test Automation, the largest) is double-width. */
+@media (min-width: 680px) {
   .skill-category:first-of-type {
     grid-column: span 2;
   }
@@ -967,7 +973,10 @@ body::after {
 }
 @media (min-width: 720px) {
   .project-card.featured {
-    grid-column: span 2;
+    grid-column: 1 / -1;
+  }
+  .project-card.featured .project-desc {
+    max-width: 72ch;
   }
 }
 .project-icon {
@@ -987,7 +996,6 @@ body::after {
 .project-desc {
   color: var(--text-muted);
   font-size: 0.95rem;
-  flex: 1;
 }
 .project-tags {
   display: flex;
@@ -1105,8 +1113,7 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .projects-grid,
-  .skills-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1147,15 +1154,14 @@ button:focus-visible,
 .project-link {
   color: inherit;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
   transition: color 0.3s ease;
 }
 .project-link:hover {
   color: var(--accent);
 }
 .project-link-hint {
+  display: inline-block;
+  margin-left: 0.3rem;
   font-size: 0.85em;
   color: var(--text-muted);
   transition:
@@ -1226,10 +1232,6 @@ html:not(.js-reveal) .project-card {
   }
 }
 
-.typed-static {
-  display: none;
-}
-
 /* ===================================================================
    Print
    The page is laid out for scrolling, which prints badly: viewport-sized
@@ -1266,8 +1268,7 @@ html:not(.js-reveal) .project-card {
   #navbar,
   .skip-link,
   .hero-scroll-hint,
-  .nav-toggle,
-  .cursor {
+  .nav-toggle {
     display: none !important;
   }
 
@@ -1371,18 +1372,10 @@ html:not(.js-reveal) .project-card {
     transform: none !important;
   }
 
-  /* Two values are written by JS on a timer, so a print catches whatever
-     frame it lands on: a half-typed phrase ("Softwa") and a mid-count stat
-     ("302+"). Print-time JS hooks are not dependable — beforeprint does not
-     fire in every headless path — so swap in static equivalents with CSS,
-     which needs no event at all. */
-  .typed-text,
-  .cursor {
-    display: none !important;
-  }
-  .typed-static {
-    display: inline;
-  }
+  /* The stat counters are written by JS on a timer, so a print catches
+     whatever frame it lands on ("302+"). Print-time JS hooks are not
+     dependable — beforeprint does not fire in every headless path — so swap
+     in the final value with CSS, which needs no event at all. */
   .stat-number {
     position: relative;
     visibility: hidden;

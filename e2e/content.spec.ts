@@ -81,12 +81,16 @@ test.describe('content rendering', () => {
     }
   });
 
-  test('the print-only static title stays hidden on screen', async ({ page }) => {
-    // It exists so printing never catches a half-typed phrase; on screen the
-    // animated span is the one that should show.
+  test('the hero title is static, complete text', async ({ page }) => {
+    // It replaced a typing animation that could be caught half-typed
+    // ("CI/CD & Deve"). Reading it twice, a second apart, guards against an
+    // animation creeping back in.
     await page.goto('/');
-    await expect(page.locator('.typed-static')).toBeHidden();
-    await expect(page.locator('.typed-text')).toBeVisible();
+    const title = page.locator('.hero-title');
+    await expect(title).toHaveText(/Test Infrastructure.*AI-Assisted Engineering/);
+    const first = await title.textContent();
+    await page.waitForTimeout(1000);
+    expect(await title.textContent()).toBe(first);
   });
 
   test('no anchor is nested inside another anchor', async ({ page }) => {
