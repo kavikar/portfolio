@@ -927,6 +927,39 @@ body::after {
   font-size: 0.8rem;
   color: var(--accent2);
 }
+/* A cert with a public badge links out as a whole row: same row look, with
+   the badge in the slot the hidden emoji icon would otherwise take. */
+a.cert-card {
+  color: inherit;
+  text-decoration: none;
+}
+.cert-badge {
+  flex: none;
+  align-self: flex-start;
+  width: 56px;
+  height: 56px;
+}
+@media (max-width: 480px) {
+  .cert-badge {
+    width: 44px;
+    height: 44px;
+  }
+}
+.cert-desc {
+  max-width: 60ch;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.cert-verify span {
+  margin-left: 0.2rem;
+}
+@media (hover: hover) {
+  a.cert-card:hover .cert-name {
+    color: var(--accent);
+  }
+}
 .cert-card::after {
   content: counter(cert, decimal-leading-zero);
   margin-left: auto;
