@@ -173,17 +173,34 @@ function renderCertifications(): void {
   if (!container) return;
 
   container.innerHTML = certifications
-    .map(
-      (cert) => `
-    <div class="cert-card">
-      <div class="cert-icon">${cert.icon}</div>
+    .map((cert) => {
+      // A cert with a public verification page is a link as a whole row, so
+      // the badge, name and description are all one click target.
+      const tag = cert.url ? 'a' : 'div';
+      const link = cert.url
+        ? ` href="${cert.url}" target="_blank" rel="noopener noreferrer"`
+        : '';
+      const icon = cert.badge
+        ? `<img class="cert-badge" src="${cert.badge}" alt="${cert.name} badge from ${cert.issuer}" width="56" height="56" loading="lazy" decoding="async" />`
+        : `<div class="cert-icon">${cert.icon}</div>`;
+      const meta = [cert.issuer, cert.issued && `Issued ${cert.issued}`]
+        .filter(Boolean)
+        .join(' · ');
+      const verify = cert.url
+        ? ` · <span class="cert-verify">Verify on Credly<span aria-hidden="true">\u2197</span></span>`
+        : '';
+
+      return `
+    <${tag} class="cert-card"${link}>
+      ${icon}
       <div>
         <div class="cert-name">${cert.name}</div>
-        <div class="cert-issuer">${cert.issuer}</div>
+        <div class="cert-issuer">${meta}${verify}</div>
+        ${cert.description ? `<p class="cert-desc">${cert.description}</p>` : ''}
       </div>
-    </div>
-  `,
-    )
+    </${tag}>
+  `;
+    })
     .join('');
 }
 

@@ -16,6 +16,13 @@ export interface Certification {
   icon: string;
   name: string;
   issuer: string;
+  /** Month issued, e.g. "Nov 2026". */
+  issued?: string;
+  description?: string;
+  /** Public verification page. When set, the whole entry links to it. */
+  url?: string;
+  /** Badge image served from public/. */
+  badge?: string;
 }
 
 export interface Project {
@@ -205,6 +212,16 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const certifications: Certification[] = [
+  {
+    icon: '✳️',
+    name: 'Claude Certified Associate – Foundations',
+    issuer: 'Anthropic',
+    issued: 'Nov 2026',
+    description:
+      'Validates practical, responsible use of Claude for real work: prompting, evaluating output, and knowing when human review is needed.',
+    url: 'https://www.credly.com/badges/768b412d-8d23-4faf-b8ac-5c1b68247e01/public_url',
+    badge: '/claude-certified-associate-foundations.png',
+  },
   {
     icon: '☁️',
     name: 'AWS Certified Cloud Practitioner',
