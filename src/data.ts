@@ -35,6 +35,8 @@ export interface Project {
   url?: string;
   /** Deployed instance, when there is one to click. */
   live?: string;
+  /** Spans the full grid width, for the larger projects. */
+  featured?: boolean;
 }
 
 export const experiences: Experience[] = [
@@ -291,6 +293,18 @@ export const projects: Project[] = [
       'Agent Skills',
     ],
     url: 'https://github.com/kavikar/shuriken',
+    featured: true,
+  },
+  {
+    icon: '🎲',
+    name: 'GameNight',
+    period: '2026',
+    description:
+      'A scorekeeper and session tracker for board and card games (Phase 10, UNO, Ticket to Ride, ONO 99, Poker Night): one universal game engine with independent rule modules, undo and correction replay, per-player stats, and a mobile-first scoring UI. Covered by 49 unit and integration tests and 16 Playwright end-to-end and accessibility (axe) tests.',
+    tags: ['Next.js', 'React', 'TypeScript', 'Zod', 'Vitest', 'Playwright', 'axe'],
+    url: 'https://github.com/kavikar/game-over',
+    live: 'https://game-over-nine-lac.vercel.app/',
+    featured: true,
   },
   {
     icon: '🧪',

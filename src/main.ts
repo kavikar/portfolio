@@ -210,7 +210,7 @@ function renderProjects(): void {
   if (!container) return;
 
   container.innerHTML = projects
-    .map((p, i) => {
+    .map((p) => {
       // The card stays a <div>: an anchor-wrapped card cannot also contain the
       // "Live demo" anchor, because nested <a> elements are invalid HTML and the
       // parser silently splits the card into two siblings.
@@ -224,9 +224,9 @@ function renderProjects(): void {
           `Live demo<span aria-hidden="true">\u2197</span></a>`
         : '';
 
-      // Glass is the surface for every project card; the first one also gets
-      // a wider pane so the grid doesn't repeat as identical equal tiles.
-      const cardClass = i === 0 ? 'project-card glass featured' : 'project-card glass';
+      // Glass is the surface for every project card; featured ones also get
+      // a full-width pane so the grid doesn't repeat as identical equal tiles.
+      const cardClass = p.featured ? 'project-card glass featured' : 'project-card glass';
 
       return `
     <div class="${cardClass}">

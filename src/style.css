@@ -979,7 +979,7 @@ a.cert-card {
   grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
 }
-/* Two columns under the full-width featured card, so the remaining cards
+/* Two columns under the full-width featured cards, so the remaining cards
    pair up evenly instead of leaving one alone on its own row. */
 @media (min-width: 720px) {
   .projects-grid {
