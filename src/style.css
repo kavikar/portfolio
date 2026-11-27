@@ -844,9 +844,10 @@ body::after {
 .skill-category:hover {
   border-top-color: var(--accent);
 }
-/* The first group (Test Automation, the largest) is double-width. */
+/* The last group (Quality Practice, the largest) is double-width, so the
+   longest list gets the room and the rows above stay level. */
 @media (min-width: 680px) {
-  .skill-category:first-of-type {
+  .skill-category:last-of-type {
     grid-column: span 2;
   }
 }
@@ -975,8 +976,15 @@ a.cert-card {
    the rest exactly, so the grid doesn't repeat as identical tiles. */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
+}
+/* Two columns under the full-width featured card, so the remaining cards
+   pair up evenly instead of leaving one alone on its own row. */
+@media (min-width: 720px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .project-card {
   border-radius: var(--radius-md);
